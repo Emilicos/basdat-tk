@@ -1,0 +1,34 @@
+{% block content %}
+<h1>Daftar Kategori Makanan</h1>
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+
+<table>
+    <tr>
+        <th>No</th>
+        <th>Nama Kategori Makanan</th>
+        <th>Aksi</th>
+    </tr>
+        <td>1</td>
+        <td>Snack</td>
+        <td><button><a>Hapus</a></button></td>
+    </tr>
+    </tr>
+        <td>2</td>
+        <td>Minuman</td>
+        <td><button><a>Hapus</a></button></td>
+    </tr>
+    </tr>
+        <td>3</td>
+        <td>Fast Food</td>
+        <td><button><a>Hapus</a></button></td>
+    </tr>
+</table>
+
+{% endblock content %}

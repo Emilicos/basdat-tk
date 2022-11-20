@@ -1,0 +1,24 @@
+
+
+{% block meta %}
+<title>Form Kategori Makanan</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Form Kategori Makanan</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Nama : </p>
+    <input type="text" name="namaKategori" placeholder="Masukkan nama kategori" class="form-control">
+    <input class="btn" type="submit" value="Simpan">
+</form>
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %} 
+
+{% endblock content %}
