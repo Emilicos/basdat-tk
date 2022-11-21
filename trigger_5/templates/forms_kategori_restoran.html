@@ -1,0 +1,50 @@
+<title>Kategori Restoran</title>
+
+<style>
+  table, th, td {
+      border:1px solid black;
+      border-collapse: collapse;
+      text-align:center;
+      padding: 8px;
+  }
+</style>
+
+<h1 class="text-red-500">Hello, {{request.user.username}}</h1>
+<h3 class="text-green-500">FORM BUAT KATEGORI RESTORAN</h3>
+
+<form id="form" onsubmit="return false;">
+    <label for="formInput">Kategori Restoran</label>
+    <input type="text" class="form-control" id="formInput" name="category_name" required>
+
+    <button class="btn btn-primary btn-lg px-py-5 row my-2" id="addButton" type="submit" value="Submit">Tambah Kategori</button>
+
+</form>
+
+<table class="table-auto">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Kategori Restoran</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Indonesia</td>
+      <td><button type="button" class="btn btn-primary">[Hapus]</button></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>India</td>
+
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Jepang</td>
+      <td><button type="button" class="btn btn-primary">[Hapus]</button></td>
+    </tr>
+
+   
+  </tbody>
+</table>
