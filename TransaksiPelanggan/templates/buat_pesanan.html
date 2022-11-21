@@ -1,0 +1,34 @@
+
+
+{% block meta %}
+<title>Buat Pesanan</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Isi Alamat</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Jalan : </p>
+    <input type="text" name="jalan" class="form-control">
+    <p>Kecamatan : </p>
+    <input type="text" name="kecamatan" class="form-control">
+    <p>Kota : </p>
+    <input type="text" name="kota" class="form-control">
+    <p><label for="provinsi">Provinsi :</label></p>
+        <select name="provinsi" id="provinsi">
+            <option value="Jawa Barat">Jawa Barat</option>
+            <option value="Jawa Timur">Jawa Timur</option>
+            <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+        </select>
+    <p><input class="btn" type="submit" value="Lanjut"></p>
+</form>
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %} 
+
+{% endblock content %}
