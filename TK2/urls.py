@@ -20,6 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tarif/', include('pengiriman_tarif_per_km.urls')),
     path('makanan/', include('makanan.urls')),
-    path('auth/', include('authentication.urls')),
-    path('restoran/', include('restoran.urls')),
+    path('auth/', include('authentication.urls')), 
+    path('restoran/', include('restoran.urls')), 
 ]
