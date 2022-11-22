@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% block meta %}
+    <title> Form Registrasi Admin </title> 
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block content %}  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <div class = "max-w-720px p-8 w-full position-center bg-main rounded-md font-bold">
+        <div id = "errorMessage"> </div>
+        <form id = "idSubmit" action = '/dashboard/' class = "flex flex-col">
+            <h2 class = "text-center font-bold"> Form Registrasi Admin </h2>
+            <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                <label for="emailForm"> Email: </label>
+                <input type="email" class="form-control" id="emailForm" aria-describedby="emailHelp" placeholder="Masukkan Email" aria-required="Input Tidak Boleh Kosong!">
+            </div>
+            <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                <label for="passwordForm"> Password: </label>
+                <input type="password" class="form-control" id="passwordForm" aria-describedby="password" placeholder="Masukkan password" aria-required="Input Tidak Boleh Kosong!">
+            </div>
+            <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                <label for="namaForm"> Nama: </label>
+                <input type="text" class="form-control" id="namaForm" aria-describedby="nama" placeholder="Masukkan namamu" aria-required="Input Tidak Boleh Kosong!">
+            </div>
+            <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                <label for="nomorForm"> Nomor HP: </label>
+                <input type="tel" class="form-control" id="nomorForm" aria-describedby="phone" placeholder="Masukkan nomor HP mu" aria-required="Input Tidak Boleh Kosong!">
+            </div>
+            <div class = "text-center pt-8">
+                <button type="submit" class="btn btn-primary text-center">Daftar</button>
+            </div>
+            </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#idSubmit").submit(function(e){
+          e.preventDefault()
+          console.log("masuk")
+          var email = $("#emailForm").val()
+          var password = $("#passwordForm").val()
+          var nama = $("#namaForm").val()
+          var noHP = $("#nomorForm").val()
+          if(email === "" || password === "" || nama === "" || noHP === ""){
+            $("#errorMessage").html("")
+            const text = `<p class = "text-white font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
+            $(text).appendTo("#errorMessage")
+          }else{
+            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "dashboard/"
+          }
+        })
+    </script>
+
+    {% endblock content %}
+</body>

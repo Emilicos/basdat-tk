@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% block meta %}
+    <title> Daftar Makanan </title> 
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block content %}  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <div class = "flex flex-col items-center my-8">
+        <h1 class = "font-bold my-4"> Detail Menu </h1> 
+        <div class = "max-w-1080px w-full mx-8">
+            <table class="table table-dark table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col"> No </th>
+                    <th scope="col"> Nama Makanan </th>
+                    <th scope="col"> Deskripsi </th>
+                    <th scope="col"> Stok </th>
+                    <th scope="col"> Harga </th>
+                    <th scope="col"> Kategori Makanan </th>
+                    <th scope="col"> Bahan Makanan </th>
+                    <th scope="col"> Aksi </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td> Roti Bakar Coklat Keju </td>
+                    <td> Roti dengan isian coklat dan keju yang dibakar </td>
+                    <td>10</td>
+                    <td>8000</td>
+                    <td> Snack </td>
+                    <td> Roti, Mentega, Coklat, Keju </td> 
+                    <td class = "flex flex-col">
+                        <button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
+                        <a href="/makanan/restoran/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td> Milkshake Vanilla </td>
+                    <td> Milkshake rasa vanilla dengan topping es krim </td>
+                    <td>5</td>
+                    <td>7000</td>
+                    <td> Minuman </td>
+                    <td> Susu, Es Krim, Gula </td> 
+                    <td class = "flex flex-col">
+                        <button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
+                        <a href="/makanan/restoran/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <form id = "idSubmit" action="">
+        <div class="modal fade" id="modalTarif" tabindex="-1" role="dialog" aria-labelledby="modalTarifLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class = "flex flex-col text-center">
+                      <h5 class="modal-title text-center" id="modalTarifLabel">Form Ubah Makanan </h5>
+                  </div>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div id = "errorMessage"> </div>
+                      <div id = "idTambah">
+                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                            <label for="namaMakananForm"> Nama Makanan: </label>
+                            <input type="text" class="form-control" id="namaMakananForm" aria-describedby="namaMakanan" placeholder="Masukkan nama makanan" aria-required="Input Tidak Boleh Kosong!" value = "Milkshake Vanilla" disabled>
+                          </div>
+                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                              <label for="deskripsiForm"> Deskripsi Makanan: </label>
+                              <input type="text" class="form-control" id="deskripsiForm" aria-describedby="deskripsi" placeholder="Masukkan deskripsi makanan" aria-required="Input Tidak Boleh Kosong!" value="Milkshake rasa vanilla dengan topping es krim">
+                          </div>
+                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                            <label for="stokForm"> Stok: </label>
+                            <input type="number" class="form-control" id="stokForm" aria-describedby="stok" placeholder="Masukkan stok makanan" aria-required="Input Tidak Boleh Kosong!" value = "5">
+                          </div>
+                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                            <label for="hargaForm"> Harga: </label>
+                            <input type="number" class="form-control" id="hargaForm" aria-describedby="harga" placeholder="Masukkan harga makanan" aria-required="Input Tidak Boleh Kosong!" value = "7000">
+                          </div>
+                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                              <label for="selectKategoriMakananForm"> Kategori makanan: </label>
+                              <select id = "selectKategoriMakananForm" class="form-select" aria-label="Default select example">
+                                  <option value = "minuman" selected> Minuman </option>
+                                  <option value = 'kategori1'> Kategori1 </option>
+                                  <option value = 'kategori2'> Kategori2 </option>
+                              </select>
+                          </div>
+                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                              <label for="selectBahanMakananForm"> Bahan makanan: </label>
+                              <select id = "selectBahanMakananForm" class="form-select" aria-label="Default select example">
+                                  <option value = "gula" selected> Gula </option>
+                                  <option value = 'bahan1'> Bahan Makanan 1 </option>
+                                  <option value = 'bahan2'> Bahan Makanan 2 </option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class = "text-white font-bold p-8 rounded-full cursor-pointer" id = "tambah">
+                          <svg class = "bg-blue-500" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-plus-lg" viewBox="0 0 16 16" fill="currentColor">
+                              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                          </svg>
+                      </div>
+                </div>
+                <div class="modal-footer flex flex-col items-center">
+                  <button type="submit" class="text-center btn btn-primary"> Simpan </button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+          
+      $("#tambah").click(function(){
+        var text = `
+        <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                <label> Bahan makanan: </label>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option value = "" selected> Pilih bahan makanan </option>
+                    <option value = 'bahan1'> Bahan Makanan 1 </option>
+                    <option value = 'bahan2'> Bahan Makanan 2 </option>
+                </select>
+            </div>
+        `
+        $(text).appendTo("#idTambah")
+      })
+
+      $("#idSubmit").submit(function(e){
+          e.preventDefault()
+          var namaMakanan = $("#namaMakananForm").val()
+          var deskripsiMakanan = $("#deskripsiForm").val()
+          var stok = $("#stokForm").val()
+          var harga = $("#hargaForm").val()
+          var kategoriMakanan = $("#selectKategoriMakananForm").val()
+          var bahanMakanan = $("#selectBahanMakananForm").val()
+
+          if(namaMakanan === "" || deskripsiMakanan === "" || stok === "" || harga === "" || kategoriMakanan === "" || bahanMakanan === "default"){
+            $("#errorMessage").html("")
+            const text = `<p class = "text-red font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
+            $(text).appendTo("#errorMessage")
+          }else{
+            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/"
+          }
+        })
+    </script>
+    {% endblock content %}
+</body>
