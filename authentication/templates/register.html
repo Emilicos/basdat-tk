@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% block meta %}
+    <title> Register </title> 
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block content %}  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <div class = "flex flex-col">
+        <h1 class = "font-bold text-center"> Register </h1>
+        <div class = "flex justify-center">
+            <div class = "flex flex-col text-center gap-y-8">
+                <div class = "flex flex-col p-8 bg-main rounded-md">
+                    <img alt = "adminFoto" src = "https://icons.veryicon.com/png/o/miscellaneous/yuanql/icon-admin.png" height = "200" width = "200">
+                    <h1 class = "font-bold"> Admin </h1>
+                    <a  href = "/auth/register/admin/">
+                        <button type="submit" class="btn btn-primary text-center">
+                            Register as Admin!
+                        </button>
+                    </a>
+                </div>
+                <div class = "flex flex-col p-8 bg-main rounded-md">
+                    <img alt = "pelangganFoto" src = "https://cdn-icons-png.flaticon.com/512/6009/6009864.png" height = "200" width = "200">
+                    <h1 class = "font-bold"> Pelanggan </h1>
+                    <a  href = "/auth/register/pelanggan/">
+                        <button type="submit" class="btn btn-primary text-center">
+                            Register as Pelanggan!
+                        </button>
+                    </a>
+                </div>
+                <div class = "flex flex-col p-8 bg-main rounded-md">
+                    <img alt = "restoranFoto" src = "https://cdn-icons-png.flaticon.com/512/3448/3448609.png" height = "200" width = "200">
+                    <h1 class = "font-bold"> Restoran </h1>
+                    <a  href = "/auth/register/restoran/">
+                        <button type="submit" class="btn btn-primary text-center">
+                            Register as Restoran!
+                        </button>
+                    </a>
+                </div>
+                <div class = "flex flex-col p-8 bg-main rounded-md">
+                    <img alt = "kurirFoto" src = "https://cdn-icons-png.flaticon.com/512/4003/4003644.png" height = "200" width = "200">
+                    <h1 class = "font-bold"> Kurir </h1>
+                    <a  href = "/auth/register/kurir/">
+                        <button type="submit" class="btn btn-primary text-center">
+                            Register as Kurir!
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+    </script>
+
+    {% endblock content %}
+</body>
