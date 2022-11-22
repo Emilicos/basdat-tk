@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Dashboard</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Admin: Kelompok A3</h2>
+    <div class="row">
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Email:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">a3@gmail.com</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Password:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">bismillahn1laiA</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Nama:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">Kelompok A3</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Nomor HP:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">012345678912</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Aktor Transaksi:</h4>
+    <div class="row">
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Nama</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Role</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Status</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Aksi</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <p class="mb-0">emir@gmail.com</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Emir</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Pelanggan</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Terverifikasi</p>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_pelanggan' %}">Detail</a></div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <p class="mb-0">alvaro@gmail.com</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Alvaro</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Restoran</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Terverifikasi</p>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_restoran' %}">Detail</a></div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <p class="mb-0">fauzan@gmail.com</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Fauzan</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Pelanggan</p>
+                </div>
+                <div id="3" class="col-sm-2">
+                    <p class="mb-0">Belum Terverifikasi</p>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_pelanggan' %}">Detail</a></div>
+                    <div class="row"><button id="2" class="btn btn-primary" onclick='verification()'>Verifikasi</button></div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <p class="mb-0">dian@gmail.com</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Dian</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Kurir</p>
+                </div>
+                <div class="col-sm-2">
+                    <p class="mb-0">Terverifikasi</p>
+                </div>
+                <div class="col-sm-2">
+                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_kurir' %}">Detail</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function verification(){
+        document.getElementById("3").innerHTML = "Terverifikasi";
+        document.getElementById("2").style.visibility = 'hidden';
+    }
+</script>
+{% endblock content %}
