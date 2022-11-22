@@ -22,4 +22,4 @@ def show_daftar_kategori_makanan(request):
 
 def hapus_kategori_makanan(request):
     messages.info(request, 'Berhasil menghapus kategori makanan!')
-    return render(request, 'daftar_kategori_makanan.html')
+    return redirect('KategoriMakanan:show_daftar_kategori_makanan')

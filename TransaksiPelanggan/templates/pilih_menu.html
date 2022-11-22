@@ -1,8 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Pilih Menu</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>Pilih Menu</h1>  
+<h1>Pilih Menu</h1> 
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %} 
+
 <form method="POST" action="">
     {% csrf_token %}
-    <table>
+    <table class="table table-striped w-auto">
         <tr>
             <th>No</th>
             <th>Nama Makanan</th>
@@ -13,22 +29,22 @@
             <td>1</td>
             <td>Telur Dadar</td>
             <td>4000</td>
-            <td><input id="menu1" type="number" min=0 value="0"></td>
-            <td><textarea id="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+            <td><input name="menu1" type="number" min=0 value="0"></td>
+            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
         </tr>
         </tr>
             <td>2</td>
             <td>Nasi</td>
             <td>4000</td>
-            <td><input id="menu2" type="number" min=0 value="0"></td>
-            <td><textarea id="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+            <td><input name="menu2" type="number" min=0 value="0"></td>
+            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
         </tr>
         </tr>
             <td>3</td>
             <td>Ikan Goreng</td>
             <td>5000</td>
-            <td><input id="menu3" type="number" min=0 value="0"></td>
-            <td><textarea id="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+            <td><input name="menu3" type="number" min=0 value="0"></td>
+            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
         </tr>
     </table>
 

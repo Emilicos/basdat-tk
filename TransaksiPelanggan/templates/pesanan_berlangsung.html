@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Pesanan Berlangsung</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Pesanan Berlangsung</h1> 
+
+<table class="table table-striped w-auto">
+    <tr>
+        <th>No</th>
+        <th>Restoran</th>
+        <th>Waktu Pesanan Dibuat</th>
+        <th>Status Pesanan</th>
+        <th>Detail</th>
+    </tr>
+        <td>1</td>
+        <td>Warteg Kutek</td>
+        <td>2022-11-04 11:30:05</td>
+        <td>Menunggu Konfirmasi Restoran</td>
+        <td><button><a href="{% url 'TransaksiPelanggan:ringkasan_pesanan' %}">Detail</a></button></td>
+    </tr>
+</table>
+{% endblock content %}

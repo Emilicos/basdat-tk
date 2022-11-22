@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Konfirmasi Pembayaran</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Konfirmasi Pembayaran</h1> 
+
+<h4>Waktu Pemesanan: 2022-11-04 11:30:05</h4>
+
+<h4>Nama Pelanggan: Dian</h4>
+<h4>Jalan: Jl. H. Amat</h4>
+<h4>Kecamatan: Beji</h4>
+<h4>Kota: Depok</h4>
+<h4>Provinsi: Jawa Barat</h4>
+
+<h4>Restoran: Warteg Kutek</h4>
+<h4>Jalan: Jl. H. Amat</h4>
+<h4>Kecamatan: Beji</h4>
+<h4>Kota: Depok</h4>
+<h4>Provinsi: Jawa Barat</h4>
+
+<h4>Makanan yang dipesan:</h4>
+<table class="table table-striped w-auto">
+    <tr>
+        <th>No</th>
+        <th>Nama Makanan</th>
+        <th>Jumlah</th>
+        <th>Catatan</th>
+    </tr>
+        <td>1</td>
+        <td>Telur Dadar</td>
+        <td>2</td>
+        <td>Bungkusnya digabung</td>
+    </tr>
+    </tr>
+        <td>2</td>
+        <td>Nasi</td>
+        <td>1</td>
+        <td></td>
+    </tr>
+</table>
+
+
+<h4>Total Harga Makanan: 12000</h4>
+<h4>Total Diskon: 0</h4>
+<h4>Biaya Pengantaran: 4000</h4>
+<h4>Total Biaya: 16000</h4>
+<h4>Jenis Pembayaran: m-banking</h4>
+
+<h4>Sisa Waktu Konfirmasi: 00:00:55</h4>
+<h4>Status Pembayaran: Menunggu Pembayaran</h4>
+<h4>Status Pesanan: Menunggu Konfirmasi Restoran</h4>
+
+<button><a href="{% url 'TransaksiPelanggan:ringkasan_pesanan' %}">KONFIRMASI PEMBAYARAN</a></button>  
+
+{% endblock content %}

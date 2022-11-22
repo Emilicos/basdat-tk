@@ -20,8 +20,7 @@ def pilih_resto(request):
 
 def pilih_menu(request):
     if request.method == 'POST':
-        # jumlah = int(request.POST.get('menu1')) + int(request.POST.get('menu2')) + int(request.POST.get('menu3'))
-        jumlah = 0 
+        jumlah = int(request.POST.get('menu1')) + int(request.POST.get('menu2')) + int(request.POST.get('menu3')) 
         if jumlah > 0:
             return redirect('TransaksiPelanggan:daftar_pesanan')
         else:

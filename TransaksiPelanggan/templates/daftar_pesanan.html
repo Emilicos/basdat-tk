@@ -1,1 +1,43 @@
-<p>halo</p>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Daftar Pesanan</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Daftar Pesanan</h1> 
+
+
+<table class="table table-striped w-auto">
+    <tr>
+        <th>No</th>
+        <th>Nama Makanan</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Total</th>
+    </tr>
+        <td>1</td>
+        <td>Telur Dadar</td>
+        <td>4000</td>
+        <td>2</td>
+        <td>8000</td>
+    </tr>
+    </tr>
+        <td>2</td>
+        <td>Nasi</td>
+        <td>4000</td>
+        <td>1</td>
+        <td>4000</td>
+    </tr>
+</table>
+<h3>Total : 12000</h3>
+<h3>Metode Pengantaran : Motor</h3>
+<h3>Metode Pembayaran : m-banking</h3>
+<h3>Total Diskon: 0</h3>
+<h3>Biaya Pengantaran : 4000</h3>
+<h3>Total Biaya : 16000</h3>
+
+<button><a href="{% url 'TransaksiPelanggan:konfirmasi_pembayaran' %}">LANJUT KE PEMBAYARAN</a></button>  
+
+{% endblock content %}
