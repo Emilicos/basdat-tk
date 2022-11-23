@@ -6,6 +6,7 @@
 {% endblock meta %}
 
 {% block content %}
+<div class="container py-5">
 <h1>Daftar Kategori Makanan</h1>
 
 {% if messages %}
@@ -24,18 +25,19 @@
     </tr>
         <td>1</td>
         <td>Snack</td>
-        <td><button><a href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></button></td>
+        <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
     </tr>
     </tr>
         <td>2</td>
         <td>Minuman</td>
-        <td><button><a href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></button></td>
+        <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
     </tr>
     </tr>
         <td>3</td>
         <td>Fast Food</td>
-        <td><button><a href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></button></td>
+        <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
     </tr>
 </table>
+</div>
 
 {% endblock content %}

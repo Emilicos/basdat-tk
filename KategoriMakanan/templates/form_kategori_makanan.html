@@ -6,6 +6,7 @@
 {% endblock meta %}
 
 {% block content %}
+<div class="container py-5">
 <h2>Form Kategori Makanan</h2>
 <form method="POST" action="">
     {% csrf_token %}
@@ -21,5 +22,6 @@
             {% endfor %}
         </ul>
 {% endif %} 
+</div>
 
 {% endblock content %}
