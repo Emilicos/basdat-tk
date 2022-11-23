@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Dashboard</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Kurir: Kelompok A3</h2>
+    <div class="row">
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Email:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">a3@gmail.com</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Password:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">bismillahn1laiA</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Nama:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">Kelompok A3</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Nomor HP:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">012345678912</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">NIK:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">1234567890123456</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                <p class="mb-0">Nama Bank:</p>
+                </div>
+                <div class="col-sm-9">
+                <p class="text-muted mb-0">bni</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                <p class="mb-0">Nomor Rekening:</p>
+                </div>
+                <div class="col-sm-9">
+                <p class="text-muted mb-0">1234567</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Plat Nomor Kendaraan:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">A 1234 AAA</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Nomor SIM:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">12345667890</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Jenis kendaraan:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">Mobil</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Merk kendaraan:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">Porsche</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Status:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">Terverifikasi</p>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Diverifikasi oleh:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">asdos basdat</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Saldo RestoPay:</p>
+            </div>
+            <div class="col-sm-9">
+                <p class="text-muted mb-0">300000000000000</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    {% if isAdmin %}
+    <div><a class="btn btn-primary" href="{% url 'authentication:dashboard_admin' %}">Kembali</a></div>
+    {% endif %}
+    
+</div>
+{% endblock content %}

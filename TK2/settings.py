@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'KategoriMakanan',
+    'TransaksiPelanggan',
     'pengiriman_tarif_per_km',
     'makanan',
     'authentication',
