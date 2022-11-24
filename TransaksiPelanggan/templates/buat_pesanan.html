@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Buat Pesanan</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Isi Alamat</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Jalan:</p>
+            </div>
+            <div class="col-sm-9">
+                <input type="text" name="jalan" class="form-control">
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Kecamatan:</p>
+            </div>
+            <div class="col-sm-9">
+                <input type="text" name="kecamatan" class="form-control">
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0">Kota:</p>
+            </div>
+            <div class="col-sm-9">
+                <input type="text" name="kota" class="form-control">
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-3">
+                <p class="mb-0"><label for="provinsi">Provinsi :</label></p>
+            </div>
+            <div class="col-sm-9">
+                <select name="provinsi" id="provinsi">
+                    <option value="Jawa Barat">Jawa Barat</option>
+                    <option value="Jawa Timur">Jawa Timur</option>
+                    <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                </select>
+            </div>
+            </div>
+        </div>
+        </div>
+        <p><button type="submit" class="btn btn-primary">Lanjut</button></p>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
+</div>
+
+
+
+{% endblock content %}

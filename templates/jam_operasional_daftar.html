@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>Jam Operasional: Daftar</title>
+{% endblock meta %}
+
+{% block content %}
+<h1 class="text-center">Daftar Jam Operasional</h1>
+<table>
+    <tr>
+        <th>No</th>
+        <th>Hari</th>
+        <th>Jam Buka</th>
+        <th>Jam Tutup</th>
+        <th>Aksi</th>
+    </tr>
+    {% for dummy in dummy_list %}
+        <tr>
+            <td>{{ dummy.id }}</td>
+            <td>{{ dummy.hari }}</td>
+            <td>{{ dummy.jam_buka }}</td>
+            <td>{{ dummy.jam_tutup }}</td>
+            <td>
+                <div class="d-flex flex-column align-items-center">
+                    <a href="{% url 'jam_operasional:jam_operasional_ubah' dummy.id %}"><button>Ubah</button></a>
+                    <a href="{% url 'jam_operasional:jam_operasional_hapus' dummy.id %}"><button>Hapus</button></a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

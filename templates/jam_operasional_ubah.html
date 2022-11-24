@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>Jam Operasional: Buat</title>
+<script>
+    $(document).ready(function() {
+        $('#form').submit(function(event) {
+            event.preventDefault();
+            let hari = $('#hari').val();
+            let jamBukaValue = $('#jam_buka').val();
+            let jamBuka = jamBukaValue == '' ? null : jamBukaValue;
+            let jamTutupValue = $('#jam_tutup').val();
+            let jamTutup = jamTutupValue == '' ? null : jamTutupValue;
+            if (hari != null && jamBuka != null && jamTutup != null) {
+                $.ajax({
+                    method: 'PUT',
+                    url: "",
+                    headers: {
+                        'X-CSRFToken': '{{csrf_token}}',
+                    },
+                    data: {
+                        hari: hari,
+                        jam_buka: jamBuka,
+                        jam_tutup: jamTutup,
+                    },
+                    success: function(data) {
+                        window.location = `{% url 'jam_operasional:jam_operasional_daftar' %}`;
+                    },
+                    error: function(error) {
+                        window.location = `{% url 'jam_operasional:jam_operasional_daftar' %}`;
+                    }
+                });
+            } else {
+                alert('Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu.');
+            }
+        });
+    });
+</script>
+{% endblock meta %}
+
+{% block content %}
+<h1 class="text-center">Form Ubah Jam Operasional</h1>
+<form id="form">
+    <div>
+        <label for="hari">Hari:</label>
+        <select id="hari" name="hari" placeholder="Pilih Hari" disabled>
+            <option value="" disabled>Pilih Hari</option>
+            <option value="Senin" {% if dummy.hari == 'Senin' %}selected{% endif %}>Senin</option>
+            <option value="Selasa" {% if dummy.hari == 'Selasa' %}selected{% endif %}>Selasa</option>
+            <option value="Rabu" {% if dummy.hari == 'Rabu' %}selected{% endif %}>Rabu</option>
+            <option value="Kamis" {% if dummy.hari == 'Kamis' %}selected{% endif %}>Kamis</option>
+            <option value="Jumat" {% if dummy.hari == 'Jumat' %}selected{% endif %}>Jumat</option>
+            <option value="Sabtu" {% if dummy.hari == 'Sabtu' %}selected{% endif %}>Sabtu</option>
+            <option value="Minggu" {% if dummy.hari == 'Minggu' %}selected{% endif %}>Minggu</option>
+        </select>
+    </div>
+    <div>
+        <label for="jam_buka">Jam buka:</label>
+        <input id="jam_buka" type="time" step="1" name="jam_buka" value="{{ dummy.jam_buka }}">
+    </div>
+    <div>
+        <label for="jam_tutup">Jam tutup:</label>
+        <input id="jam_tutup" type="time" step="1" name="jam_tutup" value="{{ dummy.jam_tutup }}">
+    </div>
+    <input type="submit" value="Simpan">
+</form>
+{% endblock content %}

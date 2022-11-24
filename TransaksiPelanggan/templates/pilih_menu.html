@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Pilih Menu</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+<h1>Pilih Menu</h1> 
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %} 
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <table class="table table-striped w-auto">
+        <tr>
+            <th>No</th>
+            <th>Nama Makanan</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+            <th>Catatan (Opsional)</th>
+        </tr>
+            <td>1</td>
+            <td>Telur Dadar</td>
+            <td>4000</td>
+            <td><input name="menu1" type="number" min=0 value="0"></td>
+            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+        </tr>
+        </tr>
+            <td>2</td>
+            <td>Nasi</td>
+            <td>4000</td>
+            <td><input name="menu2" type="number" min=0 value="0"></td>
+            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+        </tr>
+        </tr>
+            <td>3</td>
+            <td>Ikan Goreng</td>
+            <td>5000</td>
+            <td><input name="menu3" type="number" min=0 value="0"></td>
+            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+        </tr>
+    </table>
+
+    <h1>Pilih Metode Pembayaran dan Pengantaran</h1>
+        <p><label for="pengantaran">Metode Pengantaran :</label></p>
+            <select name="pengantaran" id="pengantaran">
+                <option value="Mobil">Mobil</option>
+                <option value="Motor">Motor</option>
+            </select>
+        <p><label for="pembayaran">Metode Pembayaran :</label></p>
+            <select name="pembayaran" id="pembayaran">
+                <option value="ATM">ATM</option>
+                <option value="m-banking">m-banking</option>
+                <option value="Indomaret/Alfamart">Indomaret/Alfamart</option>
+                <option value="RestoPay">RestoPay</option>
+                <option value="e-wallet">e-wallet</option>
+            </select>
+            <p><button type="submit" class="btn btn-primary">Pesan</button></p>
+</form>
+</div>
+{% endblock content %}

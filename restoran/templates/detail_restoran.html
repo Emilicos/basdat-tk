@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% block meta %}
+    <title> Daftar Makanan </title> 
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block content %}  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <div class = "flex flex-col items-center my-8">
+        <h1 class = "font-bold my-4"> Detail Restoran: [Nama - Cabang Restoran] </h1> 
+        <p> Nama Restoran: McDonalds </p> 
+        <p>Cabang: Depok </p>
+        <p> Nomor telepon: (021) 14045 </p>
+        <p>Jalan: Jl. Margonda Raya No.229 </p>
+        <p>Kecamatan: Margonda</p>
+        <p>Kota: Depok</p>
+        <p>Provinsi: Jawa Barat </p>
+        <p>Rating: 4.7</p>
+        <p>Kategori restoran: Fast Food </p>
+        <p>Jam operasional: </p>
+        <li> 13:00 </li>
+        <li> 14:00</li>
+        <p>Promo berlangsung:</p>
+        <li> Promo anak </li>
+        <li> Promo banyak beli </li>
+    </div>
+    {% endblock content %}
+</body>
