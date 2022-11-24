@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from resto_pay import urls
-from jam_operasional import urls
-from transaksi_pesanan import urls
-
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tarif/', include('pengiriman_tarif_per_km.urls')),
+    path('makanan/', include('makanan.urls')),
+    path('', include('authentication.urls')),
+    path('restoran/', include('restoran.urls')),
+    path('kategorimakanan/', include('KategoriMakanan.urls')),
+    path('transaksipelanggan/', include('TransaksiPelanggan.urls')),
     path('resto-pay/', include('resto_pay.urls')),
     path('jam-operasional/', include('jam_operasional.urls')),
     path('transaksi-pesanan/', include('transaksi_pesanan.urls')),
