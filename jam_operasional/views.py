@@ -24,17 +24,28 @@ DUMMY_LIST = [
 
 # Create your views here.
 def jam_operasional_buat(request):
-    return render(request, 'jam_operasional_buat.html')
+    context = {
+        'user': {
+            'role': 'Restoran',
+        },
+    }
+    return render(request, 'jam_operasional_buat.html', context)
 
 def jam_operasional_daftar(request):
     context = {
         'dummy_list': DUMMY_LIST,
+        'user': {
+            'role': 'Restoran',
+        },
     }
     return render(request, 'jam_operasional_daftar.html', context)
 
 def jam_operasional_ubah(request, id):
     context = {
         'dummy': DUMMY_LIST[id - 1],
+        'user': {
+            'role': 'Restoran',
+        },
     }
     return render(request, 'jam_operasional_ubah.html', context)
 

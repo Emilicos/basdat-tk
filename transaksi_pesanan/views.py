@@ -95,11 +95,17 @@ DUMMY_LIST = [
 def transaksi_pesanan_daftar(request):
     context = {
         'dummy_list': DUMMY_LIST,
+        'user': {
+            'role': 'Restoran',
+        },
     }
     return render(request, 'transaksi_pesanan_daftar.html', context)
 
 def transaksi_pesanan_detail(request, id):
     context = {
         'dummy': DUMMY_LIST[id - 1],
+        'user': {
+            'role': 'Restoran',
+        },
     }
     return render(request, 'transaksi_pesanan_detail.html', context)
