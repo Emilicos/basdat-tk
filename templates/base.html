@@ -21,7 +21,7 @@
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                 {% if user.role == 'Admin' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_admin' %}">Dashboard</a></li>
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Restoran
@@ -29,8 +29,8 @@
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="#">Daftar Kategori Restoran</a></li>
                           <li><a class="dropdown-item" href="#">Buat Kategori Restoran</a></li>
-                          <li><a class="dropdown-item" href="#">Daftar Kategori Makanan</a></li>
-                          <li><a class="dropdown-item" href="#">Buat Kategori Makanan</a></li>
+                          <li><a class="dropdown-item" href="{% url 'KategoriMakanan:show_daftar_kategori_makanan' %}">Daftar Kategori Makanan</a></li>
+                          <li><a class="dropdown-item" href="{% url 'KategoriMakanan:show_form_kategori_makanan' %}">Buat Kategori Makanan</a></li>
                           <li><a class="dropdown-item" href="#">Daftar Bahan Makanan</a></li>
                           <li><a class="dropdown-item" href="#">Buat Bahan Makanan</a></li>
                           <li><a class="dropdown-item" href="#">Daftar Restoran dan Makanan</a></li>
@@ -57,7 +57,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
                 {% elif user.role == 'Kurir' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_kurir' %}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Daftar Restoran dan Makanan</a></li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,15 +72,15 @@
                     <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
                 {% elif user.role == 'Pelanggan' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_pelanggan' %}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Daftar Restoran dan Makanan</a></li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Pesanan
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Buat Pesanan</a></li>
-                        <li><a class="dropdown-item" href="#">Pesanan Berlangsung</a></li>
+                        <li><a class="dropdown-item" href="{% url 'TransaksiPelanggan:buat_pesanan' %}">Buat Pesanan</a></li>
+                        <li><a class="dropdown-item" href="{% url 'TransaksiPelanggan:pesanan_berlangsung' %}">Pesanan Berlangsung</a></li>
                         <li><a class="dropdown-item" href="#">Riwayat Pesanan</a></li>
                       </ul>
                     </li>
@@ -88,7 +88,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
                 {% elif user.role == 'Restoran' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_restoran' %}">Dashboard</a></li>
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Jam Operasional

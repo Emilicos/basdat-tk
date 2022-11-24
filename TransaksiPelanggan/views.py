@@ -13,10 +13,20 @@ def buat_pesanan(request):
             return redirect('TransaksiPelanggan:pilih_resto')
         else:
             messages.info(request, 'Alamat yang diisi belum lengkap!')
-    return render(request, 'buat_pesanan.html')
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'buat_pesanan.html', context)
 
 def pilih_resto(request):
-    return render(request, 'pilih_resto.html')
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'pilih_resto.html', context)
 
 def pilih_menu(request):
     if request.method == 'POST':
@@ -25,16 +35,42 @@ def pilih_menu(request):
             return redirect('TransaksiPelanggan:daftar_pesanan')
         else:
             messages.info(request, 'Belum ada menu yang di pilih!')
-    return render(request, 'pilih_menu.html')
+
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'pilih_menu.html', context)
 
 def daftar_pesanan(request):
-    return render(request, 'daftar_pesanan.html')
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'daftar_pesanan.html', context)
 
 def konfirmasi_pembayaran(request):
-    return render(request, 'konfirmasi_pembayaran.html')
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'konfirmasi_pembayaran.html', context)
 
 def ringkasan_pesanan(request):
-    return render(request, 'ringkasan_pesanan.html')
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'ringkasan_pesanan.html', context)
 
 def pesanan_berlangsung(request):
-    return render(request, 'pesanan_berlangsung.html')
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'pesanan_berlangsung.html', context)
