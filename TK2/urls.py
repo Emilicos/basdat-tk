@@ -18,9 +18,11 @@ from django.urls import path, include
 
 from resto_pay import urls
 from jam_operasional import urls
+from transaksi_pesanan import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('resto-pay/', include('resto_pay.urls')),
     path('jam-operasional/', include('jam_operasional.urls')),
+    path('transaksi-pesanan/', include('transaksi_pesanan.urls')),
 ]

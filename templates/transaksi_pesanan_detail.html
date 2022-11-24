@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>Transaksi Pesanan: Daftar</title>
+{% endblock meta %}
+
+{% block content %}
+<h1 class="text-center">Ringkasan Pesanan</h1>
+<div>
+    <span>Waktu Pemesanan: {{ dummy.waktu }}</span><br>
+    <br>
+    <span>Nama Pelanggan: {{ dummy.nama }}</span><br>
+    <span>Jalan: {{ dummy.jalan }}</span><br>
+    <span>Kecamatan: {{ dummy.kecamatan }}</span><br>
+    <span>Kota: {{ dummy.kota }}</span><br>
+    <span>Provinsi: {{ dummy.provinsi }}</span><br>
+    <br>
+    <span>Restoran: {{ dummy.restoran_nama }}</span><br>
+    <span>Jalan: {{ dummy.restoran_jalan }}</span><br>
+    <span>Kecamatan: {{ dummy.restoran_kecamatan }}</span><br>
+    <span>Kota: {{ dummy.restoran_kota }}</span><br>
+    <span>Provinsi: {{ dummy.restoran_provinsi }}</span><br>
+    <br>
+    <span>Makanan yang dipesan:</span><br>
+    <ul>
+        {% for makanan in dummy.makanan %}
+            <li>{{ makanan }}</li>
+        {% endfor %}
+    </ul>
+    <span>Total Harga Makanan: {{ dummy.makanan_total_harga }}</span><br>
+    <span>Total Diskon: {{ dummy.makanan_total_diskon }}</span><br>
+    <span>Biaya Pengantaran: {{ dummy.biaya_pengantaran }}</span><br>
+    <span>Total Biaya: {{ dummy.total_biaya }}</span><br>
+    <span>Jenis Pembayaran: {{ dummy.jenis_pembayaran }}</span><br>
+    <br>
+    <span>Status Pembayaran: {{ dummy.status_pembayaran }}</span><br>
+    <span>Status Pesanan: {{ dummy.status_pesanan }}</span><br>
+    <br>
+    <span>Kurir: {{ dummy.kurir }}</span><br>
+    <span>Plat Kendaraan: {{ dummy.plat_kendaraan }}</span><br>
+    <span>Jenis Kendaraan: {{ dummy.jenis_kendaraan }}</span><br>
+    <span>Merk Kendaraan: {{ dummy.merk_kendaraan }}</span>
+</div>
+<div>
+    <a href="{% url 'transaksi_pesanan:transaksi_pesanan_daftar' %}">
+        <button>
+            Kembali
+        </button>
+    </a>
+</div>
+{% endblock content %}

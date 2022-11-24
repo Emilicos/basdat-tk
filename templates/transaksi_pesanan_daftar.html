@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>Transaksi Pesanan: Daftar</title>
+{% endblock meta %}
+
+{% block content %}
+<h1 class="text-center">Daftar Transaksi Pesanan</h1>
+<table>
+    <tr>
+        <th>No</th>
+        <th>Nama Pelanggan</th>
+        <th>Waktu Pesanan Dibuat</th>
+        <th>Status Pesanan</th>
+        <th>Aksi</th>
+    </tr>
+    {% for dummy in dummy_list %}
+        <tr>
+            <td>{{ dummy.id }}</td>
+            <td>{{ dummy.nama }}</td>
+            <td>{{ dummy.waktu }}</td>
+            <td>{{ dummy.status_pesanan }}</td>
+            <td>
+                <div class="d-flex flex-column align-items-center">
+                    <a href="{% url 'transaksi_pesanan:transaksi_pesanan_detail' dummy.id %}"><button>Detail</button></a>
+                    {% if dummy.status_pesanan != 'Pesanan Diantar' %}
+                        <a href="">
+                            <button>
+                                {% if dummy.status_pesanan == 'Menunggu Konfirmasi Restoran' %}
+                                    Konfirmasi
+                                {% elif dummy.status_pesanan == 'Pesanan Dibuat' %}
+                                    Kirim
+                                {% endif %}
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
