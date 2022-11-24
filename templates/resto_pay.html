@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>RestoPay</title>
+{% endblock meta %}
+
+{% block content %}
+<h1 class="text-center">RestoPay</h1>
+<div class="mt-1">
+    <span>Saldo: [teks]</span>
+</div>
+<div class="mt-5 d-flex flex-column align-items-center">
+    <a href="/resto-pay/isi-saldo"><button>Isi Saldo</button></a>
+    <a href="/resto-pay/tarik-saldo"><button>Tarik Saldo</button></a>
+</div>
+{% endblock content %}

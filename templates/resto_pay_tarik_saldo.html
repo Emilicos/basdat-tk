@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>RestoPay: Tarik Saldo</title>
+{% endblock meta %}
+
+{% block content %}
+<h1 class="text-center">Form Tarik Saldo</h1>
+<form action="" method="POST" class="d-flex flex-column">
+    <span>Saldo: [teks]</span>
+    <div class="mb-3">
+        <label for="nominal">Nominal Penarikan:</label>
+        <input id="nominal" type="text" name="nominal">
+    </div>
+    <span>ke:</span>
+    <span>Nama Bank: [teks]</span>
+    <span>Nomor Rekening: [teks]</span>
+    <div class="mt-3 d-flex justify-content-center">
+        <input type="submit" value="Simpan">
+    </div>
+</form>
+{% endblock content %}
