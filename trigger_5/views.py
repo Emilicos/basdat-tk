@@ -26,4 +26,17 @@ def pageKategoriRestoran(request):
     return render(request, 'forms_kategori_restoran.html', context)
 
 def pageTransaksiPemesanan(request):
-    return render(request, 'transaksi_pemesanan.html')
+    context = {
+        "user": {
+            'role': 'Kurir'
+        }
+    }
+    return render(request, 'transaksi_pemesanan.html', context)
+
+def pageDetailTransaksiPemesanan(request):
+    context = {
+        "user": {
+            'role': 'Kurir'
+        }
+    }
+    return render(request, 'detail_transaksi_pemesanan.html', context)
