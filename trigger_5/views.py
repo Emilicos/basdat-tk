@@ -10,11 +10,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 def pageBahanMakanan(request):
-    context = {'username': User.username}
+    context = {
+        "user": {
+            'role': 'Admin'
+        }
+    }
     return render(request, 'bahan_makanan.html', context)
 
 def pageKategoriRestoran(request):
-    context = {'username': User.username}
+    context = {
+        "user": {
+            'role': 'Admin'
+        }
+    }
     return render(request, 'forms_kategori_restoran.html', context)
 
 def pageTransaksiPemesanan(request):
