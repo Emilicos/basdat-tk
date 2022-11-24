@@ -15,10 +15,20 @@ def show_form_kategori_makanan(request):
             return redirect('KategoriMakanan:show_daftar_kategori_makanan')
         else:
             messages.info(request, 'Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu!')
-    return render(request, 'form_kategori_makanan.html')
+    context = {
+        'user': {
+            'role': 'Admin',
+        }
+    }
+    return render(request, 'form_kategori_makanan.html', context)
 
 def show_daftar_kategori_makanan(request):
-    return render(request, 'daftar_kategori_makanan.html')
+    context = {
+        'user': {
+            'role': 'Admin',
+        }
+    }
+    return render(request, 'daftar_kategori_makanan.html', context)
 
 def hapus_kategori_makanan(request):
     messages.info(request, 'Berhasil menghapus kategori makanan!')
