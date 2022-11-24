@@ -23,22 +23,57 @@ def show_login_register(request):
     return render(request, 'login_register.html', {})
 
 def dashboard_admin(request):
-    return render(request, 'dashboard_admin.html', {})
+    context = {
+        'user': {
+            'role': 'Admin',
+        }
+    }
+    return render(request, 'dashboard_admin.html', context)
 
 def dashboard_pelanggan(request):
-    return render(request, 'dashboard_pelanggan.html', {})
+    context = {
+        'user': {
+            'role': 'Pelanggan',
+        }
+    }
+    return render(request, 'dashboard_pelanggan.html', context)
 
 def dashboard_restoran(request):
-    return render(request, 'dashboard_restoran.html', {})
+    context = {
+        'user': {
+            'role': 'Restoran',
+        }
+    }
+    return render(request, 'dashboard_restoran.html', context)
 
 def dashboard_kurir(request):
-    return render(request, 'dashboard_kurir.html', {})
+    context = {
+        'user': {
+            'role': 'Kurir',
+        }
+    }
+    return render(request, 'dashboard_kurir.html', context)
 
 def detail_pelanggan(request):
-    return render(request, 'dashboard_pelanggan.html', {'isAdmin': True})
+    context = {
+        'user': {
+            'role': 'Admin',
+        }
+    }
+    return render(request, 'dashboard_pelanggan.html', context)
 
 def detail_restoran(request):
-    return render(request, 'dashboard_restoran.html', {'isAdmin': True})
+    context = {
+        'user': {
+            'role': 'Admin',
+        }
+    }
+    return render(request, 'dashboard_restoran.html', context)
 
 def detail_kurir(request):
-    return render(request, 'dashboard_kurir.html', {'isAdmin': True})
+    context = {
+        'user': {
+            'role': 'Admin',
+        }
+    }
+    return render(request, 'dashboard_kurir.html', context)

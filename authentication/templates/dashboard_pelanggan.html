@@ -136,7 +136,7 @@
         </div>
     </div>
 
-    {% if isAdmin %}
+    {% if user.role == 'Admin' %}
     <div><a class="btn btn-primary" href="{% url 'authentication:dashboard_admin' %}">Kembali</a></div>
     {% endif %}
 
