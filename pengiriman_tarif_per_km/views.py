@@ -4,13 +4,17 @@ from django.shortcuts import render
 def show_tarif(request):
     
     context = {
-        "user": "admin"
+        "user": {
+            'role': 'Admin'
+        }
     }
     
     return render(request, 'show_tarif.html', context)
 
 def create_tarif(request):
     context = {
-        "user": "admin"
+        "user": {
+            'role': 'Admin'
+        }
     }
     return render(request, 'create_tarif.html', context)
