@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'makanan',
     'authentication',
     'restoran',
+    'trigger_5'
 ]
 
 MIDDLEWARE = [
