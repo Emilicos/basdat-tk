@@ -54,7 +54,7 @@
                           <li><a class="dropdown-item" href="#">Buat Tarif Pengiriman per KM</a></li>
                         </ul>
                       </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
                 {% elif user.role == 'Kurir' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_kurir' %}">Dashboard</a></li>
@@ -69,7 +69,7 @@
                       </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'resto_pay:resto_pay' %}">RestoPay</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
                 {% elif user.role == 'Pelanggan' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_pelanggan' %}">Dashboard</a></li>
@@ -85,7 +85,7 @@
                       </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'resto_pay:resto_pay' %}">RestoPay</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
                 {% elif user.role == 'Restoran' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard_restoran' %}">Dashboard</a></li>
@@ -126,12 +126,9 @@
                       </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'resto_pay:resto_pay' %}">RestoPay</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
                 {% else %}
-                    <li class="nav-item active"><a class="nav-link" href="#">Dummy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dummy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dummy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Dummy</a></li>
+                    <li class="nav-item"><span class="nav-link">SIREST</span></li>
                 {% endif %}
             </ul>
         </div>
