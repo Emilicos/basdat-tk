@@ -83,12 +83,34 @@ WSGI_APPLICATION = 'TK2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASE_URL = 'postgresql://postgres:qedKf4ydIxFDx9kJEhLs@containers-us-west-124.railway.app:6592/railway'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'qedKf4ydIxFDx9kJEhLs',
+        'HOST': 'containers-us-west-124.railway.app',
+        'PORT': '6592',
+        'CONN_MAX_AGE': 600
     }
 }
+
+# Set database settings automatically using DATABASE_URL.
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=600
+)
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'railway'
+    }
 
 
 # Password validation

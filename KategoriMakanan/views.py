@@ -2,6 +2,19 @@ import random
 import string
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.http import HttpResponse, response
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.db import connection
+from datetime import datetime
+
+def dictfetchall(cursor): 
+    "Returns all rows from a cursor as a dict" 
+    desc = cursor.description 
+    return [
+            dict(zip([col[0] for col in desc], row)) 
+            for row in cursor.fetchall() 
+    ]
 
 # Create your views here.
 
@@ -23,6 +36,7 @@ def show_form_kategori_makanan(request):
     return render(request, 'form_kategori_makanan.html', context)
 
 def show_daftar_kategori_makanan(request):
+    
     context = {
         'user': {
             'role': 'Admin',
