@@ -45,9 +45,9 @@
             </div>
             <div class="col-sm-9">
                 <select name="provinsi" id="provinsi">
-                    <option value="Jawa Barat">Jawa Barat</option>
-                    <option value="Jawa Timur">Jawa Timur</option>
-                    <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                    {% for p in provinsi %}
+                    <option value="{{p.id}}">{{p.province}}</option>
+                    {% endfor %}
                 </select>
             </div>
             </div>

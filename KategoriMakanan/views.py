@@ -2,11 +2,9 @@ import random
 import string
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.http import HttpResponse, response
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db import connection
-from datetime import datetime
 
 def dictfetchall(cursor): 
     "Returns all rows from a cursor as a dict" 
@@ -19,19 +17,28 @@ def dictfetchall(cursor):
 # Create your views here.
 
 def show_form_kategori_makanan(request):
+
     if request.method == 'POST':
-        namaKategori = request.POST.get('namaKategori')
-        if namaKategori != "":
+        name = request.POST.get('namaKategori')
+        if name != "":
             length = random.randint(1,20)
             id = ''.join(random.choices(string.ascii_letters + string.digits, k = length))
+
+            with connection.cursor() as cursor:
+                cursor.execute("SET SEARCH_PATH TO SIREST;")
+                cursor.execute(f"""
+                    INSERT INTO FOOD_CATEGORY VALUES ('{id}','{name}');
+                """)
+                cursor.execute("SET SEARCH_PATH TO PUBLIC")
+
             messages.info(request, 'Kategori berhasil ditambahkan!')
+            print(id)
             return redirect('KategoriMakanan:show_daftar_kategori_makanan')
         else:
             messages.info(request, 'Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu!')
+    
     context = {
-        'user': {
-            'role': 'Admin',
-        }
+        'user': {'role': 'Admin'}
     }
     return render(request, 'form_kategori_makanan.html', context)
 
@@ -64,7 +71,7 @@ def hapus_kategori_makanan(request, id):
         cursor.execute("SET SEARCH_PATH TO SIREST;")
         cursor.execute(f"""
             DELETE FROM FOOD_CATEGORY
-            WHERE id={id};
+            WHERE id='{id}';
         """)
         cursor.execute("SET SEARCH_PATH TO PUBLIC")
 
