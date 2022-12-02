@@ -18,25 +18,22 @@
     {% endif %}     
 
 <table class="table table-striped w-auto">
-    <tr>
-        <th>No</th>
-        <th>Nama Kategori Makanan</th>
-        <th>Aksi</th>
-    </tr>
-        <td>1</td>
-        <td>Snack</td>
-        <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
-    </tr>
-    </tr>
-        <td>2</td>
-        <td>Minuman</td>
-        <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
-    </tr>
-    </tr>
-        <td>3</td>
-        <td>Fast Food</td>
-        <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
-    </tr>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Kategori Makanan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for k in kategori %}
+        <tr>
+            <td>{{k.nomor}}</td>
+            <td>{{k.name}}</td>
+            <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 </div>
 

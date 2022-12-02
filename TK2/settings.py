@@ -79,12 +79,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TK2.wsgi.application'
 
+PRODUCTION = os.getenv('DATABASE_URL') is not None
+
+ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASE_URL = 'postgresql://postgres:qedKf4ydIxFDx9kJEhLs@containers-us-west-124.railway.app:6592/railway'
 
 DATABASES = {
@@ -102,9 +102,10 @@ DATABASES = {
 # Set database settings automatically using DATABASE_URL.
 
 import dj_database_url
-DATABASES['default'] = dj_database_url.config(
-    conn_max_age=600
-)
+if PRODUCTION:
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600
+    )
 import sys
 if 'test' in sys.argv:
     DATABASES['default'] = {

@@ -36,14 +36,37 @@ def show_form_kategori_makanan(request):
     return render(request, 'form_kategori_makanan.html', context)
 
 def show_daftar_kategori_makanan(request):
-    
-    context = {
-        'user': {
-            'role': 'Admin',
+
+    with connection.cursor() as cursor:
+        context = {
+            'user': {'role': 'Admin'}
         }
-    }
+
+        cursor.execute("SET SEARCH_PATH TO SIREST;")
+        cursor.execute(f"""
+            SELECT id, name
+            FROM FOOD_CATEGORY;
+        """)
+
+        kategori = dictfetchall(cursor)
+        context['kategori'] = kategori
+
+        for i in range(len(kategori)):
+            context['kategori'][i]['nomor'] = str(i+1)
+
+        cursor.execute("SET SEARCH_PATH TO PUBLIC")
+
     return render(request, 'daftar_kategori_makanan.html', context)
 
-def hapus_kategori_makanan(request):
+def hapus_kategori_makanan(request, id):
+
+    with connection.cursor() as cursor:
+        cursor.execute("SET SEARCH_PATH TO SIREST;")
+        cursor.execute(f"""
+            DELETE FROM FOOD_CATEGORY
+            WHERE id={id};
+        """)
+        cursor.execute("SET SEARCH_PATH TO PUBLIC")
+
     messages.info(request, 'Berhasil menghapus kategori makanan!')
     return redirect('KategoriMakanan:show_daftar_kategori_makanan')
