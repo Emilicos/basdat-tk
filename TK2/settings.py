@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'restoran',
     'trigger_5',
     'resto_pay',
+    'jam_operasional',
+    'transaksi_pesanan',
 ]
 
 MIDDLEWARE = [
