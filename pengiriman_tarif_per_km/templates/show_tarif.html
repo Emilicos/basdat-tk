@@ -25,80 +25,77 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td> DKI Jakarta </td>
-                    <td>5000</td>
-                    <td>10000</td>
-                    <td class = "flex flex-col">
-                        <button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
-                        <a href="/tarif/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jawa Barat</td>
-                    <td>7000</td>
-                    <td>12000</td>
-                    <td class = "flex flex-col">
-                        <button data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
-                        <a href="/tarif/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>5500</td>
-                    <td>5500</td>
-                    <td>10000</td>
-                    <td class = "flex flex-col">
-                        <button data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
-                        <a href="/tarif/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
-                    </td>
-                  </tr>
+                  {% for item in delivery_fee_per_km_nodump %}
+                    <tr>
+                      <th scope="row"> {{forloop.counter}} </th>
+                      <td> {{item.province}} </td>
+                      <td> {{item.motorfee}} </td>
+                      <td> {{item.carfee}} </td>
+                      <td class = "flex flex-col">
+                          <button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif-{{forloop.counter}}"> Ubah </button>
+                          <a href="/tarif/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
                 </tbody>
               </table>
         </div>
     </div>
 
-    <form id = "idModal" action="">
-        <div class="modal fade" id="modalTarif" tabindex="-1" role="dialog" aria-labelledby="modalTarifLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <div class = "flex flex-col text-center">
-                      <h5 class="modal-title text-center" id="modalTarifLabel">Form Ubah Tarif Pengiriman Per Km </h5>
+    {% for item in delivery_fee_per_km %}
+      <form id = "idModal" action="">
+          <div class="modal fade" id="modalTarif-{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="modalTarifLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <div class = "flex flex-col text-center">
+                        <h5 class="modal-title text-center" id="modalTarifLabel">Form Ubah Tarif Pengiriman Per Km </h5>
+                    </div>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div id = "errorMessage"> </div>
-                    <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                        <label for="provinsi" class="font-bold mb-2"> Provinsi: </label>
-                        <input type="text" class="form-control" id="provinsi" value = "DKI Jakarta" aria-describedby="emailHelp" placeholder="Masukkan nama provinsi" aria-required="Input Tidak Boleh Kosong!" disabled>
-                      </div>
+                  <div class="modal-body">
+                      <div id = "errorMessage"> </div>
                       <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                        <label class="font-bold mb-2" for="tarif-motor"> Tarif Motor: </label>
-                        <input type="number" value = "5000" class="form-control" id="tarif-motor" aria-describedby="emailHelp" placeholder="Masukkan tarif motor" aria-required="Input Tidak Boleh Kosong!"  >
-                      </div>
-                      <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                        <label class="font-bold mb-2" for="tarif-mobil"> Tarif Mobil: </label>
-                        <input type="number" value = "10000" class="form-control" id="tarif-mobil" aria-describedby="emailHelp" placeholder="Masukkan tarif mobil" aria-required="Input Tidak Boleh Kosong!" >
-                      </div>
-                </div>
-                <div class="modal-footer flex flex-col items-center">
-                  <button type="submit" class="text-center btn btn-primary"> Simpan </button>
+                          <label for="provinsi" class="font-bold mb-2"> Provinsi: </label>
+                          <input type="text" class="form-control" id="provinsi-{{forloop.counter}}" value = "DKI Jakarta" aria-describedby="emailHelp" placeholder="Masukkan nama provinsi" aria-required="Input Tidak Boleh Kosong!" disabled>
+                        </div>
+                        <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                          <label class="font-bold mb-2" for="tarif-motor"> Tarif Motor: </label>
+                          <input type="number" class="form-control" id="tarif-motor-{{forloop.counter}}" value = "12000" aria-describedby="emailHelp" placeholder="Masukkan tarif motor" aria-required="Input Tidak Boleh Kosong!"  >
+                        </div>
+                        <div class="form-group mt-4 flex justify-center items-center gap-x-4">
+                          <label class="font-bold mb-2" for="tarif-mobil"> Tarif Mobil: </label>
+                          <input type="number" class="form-control" id="tarif-mobil-{{forloop.counter}}" value="5000" aria-describedby="emailHelp" placeholder="Masukkan tarif mobil" aria-required="Input Tidak Boleh Kosong!" >
+                        </div>
+                  </div>
+                  <div class="modal-footer flex flex-col items-center">
+                    <button type="submit" class="text-center btn btn-primary"> Simpan </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-    </form>
+      </form>
+    {% endfor %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+      var number = "{{delivery_length}}"
+      var data = String.raw`{{delivery_fee_per_km | safe}}`
+      var parsed = JSON.parse(data)
+      // for(let i = 0; i < delivery.length; i++){
+      //   console.log("ada 10")
+      // }
+    function changeModalInput(id){
+      console.log(parsed[id])
+        $(`#tarif-motor-${id+1}`).val(parsed[id].motorfee)
+        $(`#provinsi-${id+1}`).val(parsed[id].province)
+        $(`#tarif-mobil-${id+1}`).val(parsed[id].carfee)
+    }
 
-      $("#idModal").submit(function(e){
+    for(let i = 1; i <= number; i++){
+      $(`#idModal-${i}`).submit(function(e){
           e.preventDefault()
           var provinsi = $("#provinsi").val()
           var tarifMotor = $("#tarif-motor").val()
@@ -111,6 +108,14 @@
             window.location.href = window.location.protocol + "//" + window.location.host + "/" + "tarif/"
           }
         })
+    }
+
+    $(document).ready(function (){
+      for(let i = 0 ; i <= number ; i++){
+        changeModalInput(i)
+      }
+
+    })
     </script>
 
     {% endblock content %}
