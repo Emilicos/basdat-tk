@@ -5,7 +5,6 @@ from django.http import HttpResponse, JsonResponse
 from utils.db_utils import dict_fetch_all
 from utils.users import *
 
-# Create your views here.
 def resto_pay(request):
     email = request.COOKIES.get('email')
     password = request.COOKIES.get('password')
