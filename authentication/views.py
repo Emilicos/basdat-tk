@@ -4,6 +4,7 @@ from django.db import connection
 import json
 
 from utils.db_utils import dict_fetch_all
+from utils.users import get_user_role
 
 # Home
 def show_login_register(request):
