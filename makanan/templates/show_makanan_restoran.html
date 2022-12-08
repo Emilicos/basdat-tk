@@ -27,131 +27,69 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td> Roti Bakar Coklat Keju </td>
-                    <td> Roti dengan isian coklat dan keju yang dibakar </td>
-                    <td>10</td>
-                    <td>8000</td>
-                    <td> Snack </td>
-                    <td> Roti, Mentega, Coklat, Keju </td> 
-                    <td class = "flex flex-col">
-                        <button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
-                        <a href="/makanan/restoran/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td> Milkshake Vanilla </td>
-                    <td> Milkshake rasa vanilla dengan topping es krim </td>
-                    <td>5</td>
-                    <td>7000</td>
-                    <td> Minuman </td>
-                    <td> Susu, Es Krim, Gula </td> 
-                    <td class = "flex flex-col">
-                        <button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Ubah </button>
-                        <a href="/makanan/restoran/" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
-                    </td>
-                  </tr>
+                  {% for food in food_no_dumps %}
+                    <tr>
+                      <th scope="row"> {{forloop.counter}} </th>
+                      <td id = "foodname{{forloop.counter}}"> {{food.foodname}} </td>
+                      <td id = "description{{forloop.counter}}"> {{food.description}} </td>
+                      <td id = "stock{{forloop.counter}}"> {{food.stock}} </td>
+                      <td id = "price{{forloop.counter}}"> {{food.price}} </td>
+                      <td id = "fcategory{{forloop.counter}}"> {{food.fcategory}} </td>
+                      <td id = "ingredient{{forloop.counter}}"> {{food.ingredient}} </td> 
+                      <td class = "flex flex-col h-full">
+                          <a href="/makanan/restoran/update/?foodname={{food.foodname}}&description={{food.description}}&stock={{food.stock}}&price={{food.price}}&fcategory={{food.fcategory}}&ingredient={{food.ingredient}}" class = "w-full flex-col flex text-decoration-none">
+                            <button type="button"> Ubah </button>
+                          </a>
+                          {% if not food.referred %}
+                            <a href="/makanan/restoran/delete/?param1={{food.rname}}&param2={{food.rbranch}}&param3={{food.foodname}}" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
+                          {% endif %} 
+                      </td>
+                    </tr>
+                  {% endfor %}
                 </tbody>
               </table>
         </div>
     </div>
-    <form id = "idSubmit" action="">
-        <div class="modal fade" id="modalTarif" tabindex="-1" role="dialog" aria-labelledby="modalTarifLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <div class = "flex flex-col text-center">
-                      <h5 class="modal-title text-center" id="modalTarifLabel">Form Ubah Makanan </h5>
-                  </div>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div id = "errorMessage"> </div>
-                      <div id = "idTambah">
-                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                            <label for="namaMakananForm"> Nama Makanan: </label>
-                            <input type="text" class="form-control" id="namaMakananForm" aria-describedby="namaMakanan" placeholder="Masukkan nama makanan" aria-required="Input Tidak Boleh Kosong!" value = "Milkshake Vanilla" disabled>
-                          </div>
-                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                              <label for="deskripsiForm"> Deskripsi Makanan: </label>
-                              <input type="text" class="form-control" id="deskripsiForm" aria-describedby="deskripsi" placeholder="Masukkan deskripsi makanan" aria-required="Input Tidak Boleh Kosong!" value="Milkshake rasa vanilla dengan topping es krim">
-                          </div>
-                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                            <label for="stokForm"> Stok: </label>
-                            <input type="number" class="form-control" id="stokForm" aria-describedby="stok" placeholder="Masukkan stok makanan" aria-required="Input Tidak Boleh Kosong!" value = "5">
-                          </div>
-                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                            <label for="hargaForm"> Harga: </label>
-                            <input type="number" class="form-control" id="hargaForm" aria-describedby="harga" placeholder="Masukkan harga makanan" aria-required="Input Tidak Boleh Kosong!" value = "7000">
-                          </div>
-                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                              <label for="selectKategoriMakananForm"> Kategori makanan: </label>
-                              <select id = "selectKategoriMakananForm" class="form-select" aria-label="Default select example">
-                                  <option value = "minuman" selected> Minuman </option>
-                                  <option value = 'kategori1'> Kategori1 </option>
-                                  <option value = 'kategori2'> Kategori2 </option>
-                              </select>
-                          </div>
-                          <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                              <label for="selectBahanMakananForm"> Bahan makanan: </label>
-                              <select id = "selectBahanMakananForm" class="form-select" aria-label="Default select example">
-                                  <option value = "gula" selected> Gula </option>
-                                  <option value = 'bahan1'> Bahan Makanan 1 </option>
-                                  <option value = 'bahan2'> Bahan Makanan 2 </option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class = "text-white font-bold p-8 rounded-full cursor-pointer" id = "tambah">
-                          <svg class = "bg-blue-500" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-plus-lg" viewBox="0 0 16 16" fill="currentColor">
-                              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                          </svg>
-                      </div>
-                </div>
-                <div class="modal-footer flex flex-col items-center">
-                  <button type="submit" class="text-center btn btn-primary"> Simpan </button>
-                </div>
-              </div>
-            </div>
-          </div>
-    </form>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-          
-      $("#tambah").click(function(){
-        var text = `
-        <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                <label> Bahan makanan: </label>
-                <select class="form-select" aria-label="Default select example" required>
-                    <option value = "" selected> Pilih bahan makanan </option>
-                    <option value = 'bahan1'> Bahan Makanan 1 </option>
-                    <option value = 'bahan2'> Bahan Makanan 2 </option>
-                </select>
-            </div>
-        `
-        $(text).appendTo("#idTambah")
-      })
-
-      $("#idSubmit").submit(function(e){
-          e.preventDefault()
-          var namaMakanan = $("#namaMakananForm").val()
-          var deskripsiMakanan = $("#deskripsiForm").val()
-          var stok = $("#stokForm").val()
-          var harga = $("#hargaForm").val()
-          var kategoriMakanan = $("#selectKategoriMakananForm").val()
-          var bahanMakanan = $("#selectBahanMakananForm").val()
-
-          if(namaMakanan === "" || deskripsiMakanan === "" || stok === "" || harga === "" || kategoriMakanan === "" || bahanMakanan === "default"){
-            $("#errorMessage").html("")
-            const text = `<p class = "text-red font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
-            $(text).appendTo("#errorMessage")
-          }else{
-            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/"
+        var data = String.raw`{{food | safe}}`
+        var parsed = JSON.parse(data)
+        $(document).ready(function (){
+          for(let i = 1 ; i <= parsed.length ; i++){
+            $(`#btn${i}`).click(function(){
+              let foodname = $(`#foodname${i}`).text()
+              let description = $(`#description${i}`).text()
+              let stock = $(`#stock${i}`).text()
+              let price = $(`#price${i}`).text()
+              let fcategory = $(`#fcategory${i}`).text()
+              let ingredient = $(`#ingredient${i}`).text()
+              try{
+                $.ajax({
+                  type: "POST",
+                  url: "/makanan/restoran/update/",
+                  data: {
+                    "foodname": foodname,
+                    "description": description,
+                    "stock": parseInt(stock),
+                    "price": parseInt(price),
+                    "fcategory": fcategory,
+                    "ingredient": ingredient,
+                  },
+                  success: function(data){
+                    window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/update/"
+                  },
+                  error: function(error){
+                    alert(error)
+                  }
+                })
+              }catch (error){
+                alert(error)
+              }
+            })
           }
         })
+
     </script>
     {% endblock content %}
 </body>

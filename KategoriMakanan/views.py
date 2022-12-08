@@ -54,7 +54,7 @@ def show_daftar_kategori_makanan(request):
         for i in range(len(kategori)):
             context['kategori'][i]['nomor'] = str(i+1)
 
-        cursor.execute("SET SEARCH_PATH TO PUBLIC")
+        cursor.execute("SET SEARCH_PATH TO PUBLIC;")
 
     return render(request, 'daftar_kategori_makanan.html', context)
 
@@ -66,7 +66,7 @@ def hapus_kategori_makanan(request, id):
             DELETE FROM FOOD_CATEGORY
             WHERE id={id};
         """)
-        cursor.execute("SET SEARCH_PATH TO PUBLIC")
+        cursor.execute("SET SEARCH_PATH TO PUBLIC;")
 
     messages.info(request, 'Berhasil menghapus kategori makanan!')
     return redirect('KategoriMakanan:show_daftar_kategori_makanan')

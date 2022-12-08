@@ -106,8 +106,6 @@
             const text = `<p class = "text-red font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
             $(text).appendTo("#errorMessage")
           }else{
-            console.log("tarifMobil", tarifMobil)
-            console.log("tarifMotor", tarifMotor)
             try{
               $.ajax({
                 type: "POST",
