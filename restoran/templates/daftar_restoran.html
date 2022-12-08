@@ -23,33 +23,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td> McDonalds Depok </td>
-                    <td>4.7</td>
-                    <td class = "flex flex-col">
-                        <a href="/restoran/detail/" class = "w-full flex-col flex text-decoration-none"><button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Detail </button></a>
-                        <a href="/makanan/pengguna/" class = "w-full flex-col flex text-decoration-none"><button> Menu </button></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>KFC Depok</td>
-                    <td>4.3</td>
-                    <td class = "flex flex-col">
-                        <a href="/restoran/detail/" class = "w-full flex-col flex text-decoration-none"><button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Detail </button></a>
-                        <a href="/makanan/pengguna/" class = "w-full flex-col flex text-decoration-none"><button> Menu </button></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>McDonalds Tanggerang</td>
-                    <td>3.8</td>
-                    <td class = "flex flex-col">
-                        <a href="/restoran/detail/" class = "w-full flex-col flex text-decoration-none"><button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Detail </button></a>
-                        <a href="/makanan/pengguna/" class = "w-full flex-col flex text-decoration-none"><button> Menu </button></a>
-                    </td>
-                  </tr>
+                  {% for restaurant in restaurant_no_dumps %}
+                    <tr>
+                      <th scope="row"> {{forloop.counter}} </th>
+                      <td id = "resto{{forloop.counter}}"> {{restaurant.rname}} -- {{restaurant.rbranch}}</td>
+                      <td>{{restaurant.rating}}</td>
+                      <td class = "flex flex-col">
+                          <a href="/restoran/{{forloop.counter}}/" class = "w-full flex-col flex text-decoration-none"><button type="button" data-bs-toggle = "modal" data-bs-target = "#modalTarif"> Detail </button></a>
+                          <button id = "btn{{forloop.counter}}" class = "w-full flex-col flex text-center items-center"> Menu </button>
+                      </td>
+                    </tr>
+                  {% endfor %}
                 </tbody>
               </table>
         </div>
@@ -57,6 +41,21 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+      var data = String.raw`{{restaurant | safe}}`
+      var parsed = JSON.parse(data)
+
+      $(document).ready(function (){
+
+        for(let i = 1 ; i <= parsed.length ; i++){
+          $(`#btn${i}`).click(function(){
+            let restorantValue = $(`#resto${i}`).text()
+            restoranList = restorantValue.split("--")
+            rname = restoranList[0]
+            rbranch = restoranList[1]
+            window.location.href = window.location.protocol + "//" + window.location.host + "/" + `makanan/pengguna/?param1=${rname}&param2=${rbranch}`
+          })
+        }
+     })
 
     </script>
 

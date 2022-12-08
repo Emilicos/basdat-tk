@@ -26,27 +26,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td> Roti Bakar Coklat Keju </td>
-                    <td> Roti dengan isian coklat dan keju yang dibakar </td>
-                    <td>10</td>
-                    <td>8000</td>
-                    <td> Snack </td>
-                    <td> Roti, Mentega, Coklat, Keju </td> 
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td> Milkshake Vanilla </td>
-                    <td> Milkshake rasa vanilla dengan topping es krim </td>
-                    <td>5</td>
-                    <td>7000</td>
-                    <td> Minuman </td>
-                    <td> Susu, Es Krim, Gula </td> 
-                  </tr>
+                  {% for food in food_no_dumps %}
+                    <tr>
+                      <th scope="row"> {{forloop.counter}} </th>
+                      <td> {{food.foodname}} </td>
+                      <td> {{food.description}} </td>
+                      <td> {{food.stock}} </td>
+                      <td> {{food.price}} </td>
+                      <td> {{food.fcategory}} </td>
+                      <td> {{food.ingredient}} </td> 
+                    </tr>
+                  {% endfor %}
                 </tbody>
               </table>
         </div>
     </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+          
+    
+    </script>
     {% endblock content %}
 </body>
