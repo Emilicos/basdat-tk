@@ -17,11 +17,12 @@
         <th>Status Pesanan</th>
         <th>Detail</th>
     </tr>
-        <td>1</td>
-        <td>Warteg Kutek</td>
-        <td>2022-11-04 11:30:05</td>
-        <td>Menunggu Konfirmasi Restoran</td>
-        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:ringkasan_pesanan' %}">Detail</a></td>
+        {% for t in transaction %}
+        <td>{{t.nomor}}</td>
+        <td>{{t.rname}} {{t.rbranch}}</td>
+        <td>{{t.datetime}}</td>
+        <td>{{t.status}}</td>
+        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:ringkasan_pesanan' t.email t.datetime %}">Detail</a></td>
     </tr>
 </table>
 </div>

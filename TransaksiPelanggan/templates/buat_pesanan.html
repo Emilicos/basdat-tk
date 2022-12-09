@@ -46,7 +46,7 @@
             <div class="col-sm-9">
                 <select name="provinsi" id="provinsi">
                     {% for p in provinsi %}
-                    <option value="{{p.id}}">{{p.province}}</option>
+                    <option value="{{p.id}}_{{p.province}}">{{p.province}}</option>
                     {% endfor %}
                 </select>
             </div>

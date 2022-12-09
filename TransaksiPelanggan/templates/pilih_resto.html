@@ -16,23 +16,18 @@
         <th>Promo</th>
         <th>Pilih Resto</th>
     </tr>
-        <td>1</td>
-        <td>Warteg Kutek</td>
-        <td></td>
-        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:pilih_menu' %}">Pilih</a></td>
+    {% for r in restoran %}
+    <tr>
+        <td>{{r.nomor}}</td>
+        <td>{{r.Rname}} {{r.Rbranch}}</td>
+        <td>
+            {% for p in r.promo %}
+            {{p.promoname}} <br>
+            {% endfor %}
+        </td>
+        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:pilih_menu' r.Rname r.Rbrach %}">Pilih</a></td>
     </tr>
-    </tr>
-        <td>2</td>
-        <td>Katsu Pacil</td>
-        <td>Promo IPK >3.9</td>
-        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:pilih_menu' %}">Pilih</a></td>
-    </tr>
-    </tr>
-        <td>3</td>
-        <td>Dips Perpusat</td>
-        <td></td>
-        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:pilih_menu' %}">Pilih</a></td>
-    </tr>
+    {% endfor %}
 </table>
 </div>
 

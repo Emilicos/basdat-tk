@@ -5,17 +5,12 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db import connection
-
-def dictfetchall(cursor): 
-    "Returns all rows from a cursor as a dict" 
-    desc = cursor.description 
-    return [
-            dict(zip([col[0] for col in desc], row)) 
-            for row in cursor.fetchall() 
-    ]
+from django.views.decorators.csrf import csrf_exempt
+from utils.db_utils import dict_fetch_all
 
 # Create your views here.
 
+@csrf_exempt
 def show_form_kategori_makanan(request):
 
     if request.method == 'POST':
@@ -55,7 +50,7 @@ def show_daftar_kategori_makanan(request):
             FROM FOOD_CATEGORY;
         """)
 
-        kategori = dictfetchall(cursor)
+        kategori = dict_fetch_all(cursor)
         context['kategori'] = kategori
 
         for i in range(len(kategori)):
