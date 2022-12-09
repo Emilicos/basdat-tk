@@ -28,23 +28,25 @@
                 </thead>
                 <tbody>
                   {% for food in food_no_dumps %}
-                    <tr>
-                      <th scope="row"> {{forloop.counter}} </th>
-                      <td id = "foodname{{forloop.counter}}"> {{food.foodname}} </td>
-                      <td id = "description{{forloop.counter}}"> {{food.description}} </td>
-                      <td id = "stock{{forloop.counter}}"> {{food.stock}} </td>
-                      <td id = "price{{forloop.counter}}"> {{food.price}} </td>
-                      <td id = "fcategory{{forloop.counter}}"> {{food.fcategory}} </td>
-                      <td id = "ingredient{{forloop.counter}}"> {{food.ingredient}} </td> 
-                      <td class = "flex flex-col h-full">
-                          <a href="/makanan/restoran/update/?foodname={{food.foodname}}&description={{food.description}}&stock={{food.stock}}&price={{food.price}}&fcategory={{food.fcategory}}&ingredient={{food.ingredient}}" class = "w-full flex-col flex text-decoration-none">
-                            <button type="button"> Ubah </button>
-                          </a>
-                          {% if not food.referred %}
-                            <a href="/makanan/restoran/delete/?param1={{food.rname}}&param2={{food.rbranch}}&param3={{food.foodname}}" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
-                          {% endif %} 
-                      </td>
-                    </tr>
+                    {% if food.stock != 0 %}
+                      <tr>
+                        <th scope="row"> {{forloop.counter}} </th>
+                        <td id = "foodname{{forloop.counter}}"> {{food.foodname}} </td>
+                        <td id = "description{{forloop.counter}}"> {{food.description}} </td>
+                        <td id = "stock{{forloop.counter}}"> {{food.stock}} </td>
+                        <td id = "price{{forloop.counter}}"> {{food.price}} </td>
+                        <td id = "fcategory{{forloop.counter}}"> {{food.fcategory}} </td>
+                        <td id = "ingredient{{forloop.counter}}"> {{food.ingredient}} </td> 
+                        <td class = "flex flex-col h-full">
+                            <a href="/makanan/restoran/update/?foodname={{food.foodname}}&description={{food.description}}&stock={{food.stock}}&price={{food.price}}&fcategory={{food.fcategory}}&ingredient={{food.ingredient}}" class = "w-full flex-col flex text-decoration-none">
+                              <button type="button"> Ubah </button>
+                            </a>
+                            {% if not food.referred %}
+                              <a href="/makanan/restoran/delete/?param1={{food.rname}}&param2={{food.rbranch}}&param3={{food.foodname}}" class = "w-full flex-col flex text-decoration-none"><button> Hapus </button></a>
+                            {% endif %} 
+                        </td>
+                      </tr>
+                    {% endif %}
                   {% endfor %}
                 </tbody>
               </table>
