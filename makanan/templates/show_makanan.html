@@ -27,15 +27,17 @@
                 </thead>
                 <tbody>
                   {% for food in food_no_dumps %}
-                    <tr>
-                      <th scope="row"> {{forloop.counter}} </th>
-                      <td> {{food.foodname}} </td>
-                      <td> {{food.description}} </td>
-                      <td> {{food.stock}} </td>
-                      <td> {{food.price}} </td>
-                      <td> {{food.fcategory}} </td>
-                      <td> {{food.ingredient}} </td> 
-                    </tr>
+                    {% if food.stock != 0 %}
+                      <tr>
+                        <th scope="row"> {{forloop.counter}} </th>
+                        <td> {{food.foodname}} </td>
+                        <td> {{food.description}} </td>
+                        <td> {{food.stock}} </td>
+                        <td> {{food.price}} </td>
+                        <td> {{food.fcategory}} </td>
+                        <td> {{food.ingredient}} </td> 
+                      </tr>
+                    {% endif %}
                   {% endfor %}
                 </tbody>
               </table>
