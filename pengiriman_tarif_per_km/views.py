@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db import connection
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 import json
 import random
 from django.views.decorators.csrf import csrf_exempt
@@ -57,7 +57,7 @@ def update_tarif(request):
                 cursor.execute(f"""
                 UPDATE DELIVERY_FEE_PER_KM SET motorFee = {motorfee}, carFee = {carfee} WHERE id = '{id}';""")
 
-                cursor.execute("SET SEARCH_PATH TO PUBLIC")
+                cursor.execute("SET SEARCH_PATH TO PUBLIC;")
                 return JsonResponse({
                     "message": "Successful"
                 })
@@ -95,7 +95,7 @@ def show_create_tarif(request):
             while(id in listOfId):  
                 id = "D" + f"{random.randint(1, 1000000)}"
             
-            cursor.execute("SET SEARCH_PATH TO PUBLIC")
+            cursor.execute("SET SEARCH_PATH TO PUBLIC;")
         with connection.cursor() as cursor:
             try: 
                 cursor.execute("SET SEARCH_PATH TO SIREST;")
@@ -103,7 +103,7 @@ def show_create_tarif(request):
                 INSERT INTO DELIVERY_FEE_PER_KM VALUES
                 ('{id}', '{province}', {motorfee}, {carfee});
                  """)
-                cursor.execute("SET SEARCH_PATH TO PUBLIC")
+                cursor.execute("SET SEARCH_PATH TO PUBLIC;")
                 return JsonResponse({
                     "message": "Successful"
                 })
@@ -122,6 +122,6 @@ def delete_tarif(request, id):
             DELETE FROM DELIVERY_FEE_PER_KM
             WHERE id='{id}';
         """)
-        cursor.execute("SET SEARCH_PATH TO PUBLIC")
+        cursor.execute("SET SEARCH_PATH TO PUBLIC;")
 
     return redirect('tarif:show_tarif')
