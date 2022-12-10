@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="container py-5">
-    <h2>Restoran: Warteg Kutek</h2>
+    <h2>Restoran: {{data.rname}} {{data.rbranch}}</h2>
     <div class="row">
         <div class="card mb-4">
         <div class="card-body">
@@ -16,7 +16,7 @@
                 <p class="mb-0">Email:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">wartegkutek@gmail.com</p>
+                <p class="text-muted mb-0">{{data.email}}</p>
             </div>
             </div>
             <hr>
@@ -25,7 +25,7 @@
                 <p class="mb-0">Password:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">bismillahL4Ris</p>
+                <p class="text-muted mb-0">{{data.password}}</p>
             </div>
             </div>
             <hr>
@@ -34,7 +34,7 @@
                 <p class="mb-0">Nama:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Warteg Kutek</p>
+                <p class="text-muted mb-0">{{data.fname}} {{data.lname}}</p>
             </div>
             </div>
             <hr>
@@ -43,7 +43,7 @@
                 <p class="mb-0">Nomor HP:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">012345678912</p>
+                <p class="text-muted mb-0">{{data.phonenum}}</p>
             </div>
             </div>
             <hr>
@@ -52,7 +52,7 @@
                 <p class="mb-0">NIK:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">1234567890123456</p>
+                <p class="text-muted mb-0">{{data.nik}}</p>
             </div>
             </div>
             <hr>
@@ -61,7 +61,7 @@
                 <p class="mb-0">Nama Bank:</p>
                 </div>
                 <div class="col-sm-9">
-                <p class="text-muted mb-0">bni</p>
+                <p class="text-muted mb-0">{{data.bankname}}</p>
                 </div>
             </div>
             <hr>
@@ -70,7 +70,7 @@
                 <p class="mb-0">Nomor Rekening:</p>
                 </div>
                 <div class="col-sm-9">
-                <p class="text-muted mb-0">1234567</p>
+                <p class="text-muted mb-0">{{data.accountno}}</p>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                 <p class="mb-0">Nama restoran:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Warteg</p>
+                <p class="text-muted mb-0">{{data.rname}}</p>
             </div>
             </div>
             <hr>
@@ -93,7 +93,7 @@
                 <p class="mb-0">Cabang:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Kutek</p>
+                <p class="text-muted mb-0">{{data.rbranch}}</p>
             </div>
             </div>
             <hr>
@@ -102,7 +102,7 @@
                 <p class="mb-0">Nomor telepon:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">012345678912</p>
+                <p class="text-muted mb-0">{{data.rphonenum}}</p>
             </div>
             </div>
             <hr>
@@ -111,7 +111,7 @@
                 <p class="mb-0">Jalan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Jl. H. Amat</p>
+                <p class="text-muted mb-0">{{data.street}}</p>
             </div>
             </div>
             <hr>
@@ -120,7 +120,7 @@
                     <p class="mb-0">Kecamatan:</p>
                 </div>
                 <div class="col-sm-9">
-                    <p class="text-muted mb-0">Beji</p>
+                    <p class="text-muted mb-0">{{data.district}}</p>
                 </div>
                 </div>
                 <hr>
@@ -129,7 +129,7 @@
                     <p class="mb-0">Kota:</p>
                 </div>
                 <div class="col-sm-9">
-                    <p class="text-muted mb-0">Depok</p>
+                    <p class="text-muted mb-0">{{data.city}}</p>
                 </div>
                 </div>
                 <hr>
@@ -138,7 +138,7 @@
                     <p class="mb-0">Provinsi:</p>
                 </div>
                 <div class="col-sm-9">
-                    <p class="text-muted mb-0">Jawa Barat</p>
+                    <p class="text-muted mb-0">{{data.province}}</p>
                 </div>
                 </div>
                 <hr>
@@ -147,7 +147,7 @@
                     <p class="mb-0">Rating:</p>
                 </div>
                 <div class="col-sm-9">
-                    <p class="text-muted mb-0">10</p>
+                    <p class="text-muted mb-0">{{data.rating}}</p>
                 </div>
                 </div>
                 <hr>
@@ -156,16 +156,7 @@
                     <p class="mb-0">Kategori Restoran:</p>
                 </div>
                 <div class="col-sm-9">
-                    <p class="text-muted mb-0">Fast Food</p>
-                </div>
-                </div>
-                <hr>
-                <div class="row">
-                <div class="col-sm-3">
-                    <p class="mb-0">Jam Operasional:</p>
-                </div>
-                <div class="col-sm-9">
-                    <p class="text-muted mb-0"></p>
+                    <p class="text-muted mb-0">{{data.name}}</p>
                 </div>
                 </div>
         </div>
@@ -186,58 +177,37 @@
                 <p class="mb-0">Tutup</p>
             </div>
             </div>
+            {% for j in jadwal %}
             <hr>
             <div class="row">
             <div class="col-sm-4">
-                <p class="text-muted mb-0">Senin</p>
+                <p class="text-muted mb-0">{{j.day}}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-muted mb-0">7:00</p>
+                <p class="text-muted mb-0">{{j.starthours}}</p>
             </div>
             <div class="col-sm-4">
-                <p class="text-muted mb-0">22:00</p>
+                <p class="text-muted mb-0">{{j.endhours}}</p>
             </div>
             </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-4">
-                <p class="text-muted mb-0">Selasa</p>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-muted mb-0">7:00</p>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-muted mb-0">22:00</p>
-            </div>
-            </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-4">
-                <p class="text-muted mb-0">Minggu</p>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-muted mb-0">10:00</p>
-            </div>
-            <div class="col-sm-4">
-                <p class="text-muted mb-0">22:00</p>
-            </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
+    {% if user.role == 'Admin' %}
     <div class="row">
         <div class="card mb-4">
         <div class="card-body">
             <h4>Promo Berlangsung:</h4>
-            <div class="row">
-                <p class="text-muted mb-0">Promo weekend</p>   
-            </div>
+            {% for p in promo %}
             <hr>
             <div class="row">
-                <p class="text-muted mb-0">Promo hari raya</p>
+                <p class="text-muted mb-0">{{p.promoname}}</p>   
             </div>
+            {% endfor %}
         </div>
     </div>
+    {% endif %}
 
     <div class="row">
         <div class="card mb-4">
@@ -247,37 +217,34 @@
                 <p class="mb-0">Status:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Terverifikasi</p>
+                <p class="text-muted mb-0">{{data.status}}</p>
             </div>
             </div>
+            {% if data.status == 'Terverifikasi' %}
             <hr>
             <div class="row">
             <div class="col-sm-3">
                 <p class="mb-0">Diverifikasi oleh:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">asdos basdat</p>
+                <p class="text-muted mb-0">{{data.adminid}}</p>
             </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="card mb-4">
-        <div class="card-body">
+            <hr>
             <div class="row">
             <div class="col-sm-3">
                 <p class="mb-0">Saldo RestoPay:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">300000000000000</p>
+                <p class="text-muted mb-0">{{data.restopay}}</p>
             </div>
             </div>
+            {% endif %}
         </div>
     </div>
 
     {% if user.role == 'Admin' %}
-    <div><a class="btn btn-primary" href="{% url 'authentication:dashboard_admin' %}">Kembali</a></div>
+    <div><a class="btn btn-primary" href="{% url 'authentication:dashboard' %}">Kembali</a></div>
     {% endif %}
 
 </div>
