@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Transaksi Pesanan: Daftar</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Form Bahan Makanan</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    {% for data in dummy %}
+        <p>Restoran - Cabang: {{ dummy.cabang-restoran }}</p>
+        <p>Nama Pelanggan: {{ dummy.nama-pelanggan }}</p>
+        <p>Waktu Pesanan Dibuat: {{ dummy.waktu-pesanan-dibuat }}</p>
+        {% if dummy.status-pesanan}
+            <p>Status Pesanan: Pesanan Diantar</p>
+        <p>Aksi: 
+            <form>
+                <button type="button" href="#">Detail</button>
+                {% if dummy.status-pesanan}
+                    <button type="button" href="#">Selesai</button>
+                {% endif %}
+            </form>
+        </p>
+    {% endfor %}
+</form>
+
+<div>
+    <a href="#">
+        <button>
+            Kembali
+        </button>
+    </a>
+</div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Form Bahan Makanan</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+<h2>Form Bahan Makanan</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Nama : </p>
+    <input type="text" name="namaBahan" placeholder="Masukkan nama bahan" class="form-control">
+    <button type="submit" class="btn btn-primary">Simpan</button>
+</form>
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %} 
+</div>
+
+{% endblock content %}
