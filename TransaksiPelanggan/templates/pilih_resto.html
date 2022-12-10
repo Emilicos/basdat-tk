@@ -19,13 +19,13 @@
     {% for r in restoran %}
     <tr>
         <td>{{r.nomor}}</td>
-        <td>{{r.Rname}} {{r.Rbranch}}</td>
+        <td>{{r.rname}} {{r.rbranch}}</td>
         <td>
             {% for p in r.promo %}
             {{p.promoname}} <br>
             {% endfor %}
         </td>
-        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:pilih_menu' r.Rname r.Rbrach %}">Pilih</a></td>
+        <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:pilih_menu' r.rname r.rbranch %}">Pilih</a></td>
     </tr>
     {% endfor %}
 </table>

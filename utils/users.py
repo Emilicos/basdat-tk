@@ -12,7 +12,7 @@ def get_user_role(email):
         ''')
         user_list = dict_fetch_all(cursor)
     if len(user_list) != 0:
-        return 'admin'
+        return 'Admin'
     
     # Check Courier
     with connection.cursor() as cursor:
@@ -24,7 +24,7 @@ def get_user_role(email):
         ''')
         user_list = dict_fetch_all(cursor)
     if len(user_list) != 0:
-        return 'courier'
+        return 'Kurir'
     
     # Check Customer
     with connection.cursor() as cursor:
@@ -36,7 +36,7 @@ def get_user_role(email):
         ''')
         user_list = dict_fetch_all(cursor)
     if len(user_list) != 0:
-        return 'customer'
+        return 'Pelanggan'
     
     # Check Restaurant
     with connection.cursor() as cursor:
@@ -48,6 +48,6 @@ def get_user_role(email):
         ''')
         user_list = dict_fetch_all(cursor)
     if len(user_list) != 0:
-        return 'restaurant'
+        return 'Restoran'
     
     return 'none'

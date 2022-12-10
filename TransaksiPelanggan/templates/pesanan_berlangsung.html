@@ -17,13 +17,16 @@
         <th>Status Pesanan</th>
         <th>Detail</th>
     </tr>
-        {% for t in transaction %}
+    {% for t in transaction %}
+    <tr>
         <td>{{t.nomor}}</td>
         <td>{{t.rname}} {{t.rbranch}}</td>
         <td>{{t.datetime}}</td>
         <td>{{t.status}}</td>
         <td><a class="btn btn-primary" href="{% url 'TransaksiPelanggan:ringkasan_pesanan' t.email t.datetime %}">Detail</a></td>
     </tr>
+    {% endfor %}
+    
 </table>
 </div>
 {% endblock content %}
