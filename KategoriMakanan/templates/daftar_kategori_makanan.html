@@ -30,7 +30,7 @@
         <tr>
             <td>{{k.nomor}}</td>
             <td>{{k.name}}</td>
-            <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' %}">Hapus</a></td>
+            <td><a class="btn btn-primary" href="{% url 'KategoriMakanan:hapus_kategori_makanan' k.id %}">Hapus</a></td>
         </tr>
         {% endfor %}
     </tbody>
