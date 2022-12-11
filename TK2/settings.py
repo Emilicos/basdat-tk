@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+APP_NAME = 'sirest-a03'
+CSRF_TRUSTED_ORIGINS = [f'https://{APP_NAME}.up.railway.app']
 
 # Application definition
 
