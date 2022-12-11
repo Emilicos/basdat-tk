@@ -14,5 +14,4 @@ urlpatterns = [
     path('dashboard/', dashboard, name = 'dashboard'),
     path('detail/<str:role>/<str:email>', detail, name = 'detail'),
     path('dashboard/verification/<str:email>/', verification, name = 'verification'),
-    path('all-user/', all_user, name = 'all_user'),
 ]

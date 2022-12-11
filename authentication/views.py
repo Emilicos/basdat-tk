@@ -348,15 +348,3 @@ def detail_kurir(request):
     }
     return render(request, 'dashboard_kurir.html', context)
 
-from django.core import serializers
-def all_user(request):
-    with connection.cursor() as cursor:
-        cursor.execute('SET SEARCH_PATH TO SIREST;')
-        cursor.execute(f'''
-            SELECT *
-            FROM USER_ACC;
-        ''')
-        user_list = dict_fetch_all(cursor)
-    return HttpResponse(serializers.serialize("json", user_list), content_type="application/json")
-
-
