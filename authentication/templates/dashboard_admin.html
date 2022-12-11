@@ -16,7 +16,7 @@
                 <p class="mb-0">Email:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">a3@gmail.com</p>
+                <p class="text-muted mb-0">{{data.email}}</p>
             </div>
             </div>
             <hr>
@@ -25,7 +25,7 @@
                 <p class="mb-0">Password:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">bismillahn1laiA</p>
+                <p class="text-muted mb-0">{{data.password}}</p>
             </div>
             </div>
             <hr>
@@ -34,7 +34,7 @@
                 <p class="mb-0">Nama:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Kelompok A3</p>
+                <p class="text-muted mb-0">{{data.fname}} {{data.lname}}</p>
             </div>
             </div>
             <hr>
@@ -43,7 +43,7 @@
                 <p class="mb-0">Nomor HP:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">012345678912</p>
+                <p class="text-muted mb-0">{{data.phonenum}}</p>
             </div>
             </div>
         </div>
@@ -70,87 +70,41 @@
                     <p class="mb-0">Aksi</p>
                 </div>
             </div>
+            {% for t in t_actor %}
             <hr>
             <div class="row">
                 <div class="col-sm-2">
-                    <p class="mb-0">emir@gmail.com</p>
+                    <p class="mb-0">{{t.email}}</p>
                 </div>
                 <div class="col-sm-2">
-                    <p class="mb-0">Emir</p>
+                    <p class="mb-0">{{t.fname}} {{t.lname}}</p>
                 </div>
                 <div class="col-sm-2">
-                    <p class="mb-0">Pelanggan</p>
+                    <p class="mb-0">{{t.role}}</p>
                 </div>
                 <div class="col-sm-2">
-                    <p class="mb-0">Terverifikasi</p>
+                    <p class="mb-0" id="{{t.email}}_status">{{t.status}}</p>
                 </div>
                 <div class="col-sm-2">
-                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_pelanggan' %}">Detail</a></div>
+                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail' t.role t.email %}">Detail</a></div>
+                    {% if t.status == 'Belum Terverifikasi'%}
+                    <div class="row"><button type="button" id="{{t.email}}" class="btn btn-primary" onclick='verif(this.id)'>Verifikasi</button></div>
+                    {% endif %}
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-2">
-                    <p class="mb-0">alvaro@gmail.com</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Alvaro</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Restoran</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Terverifikasi</p>
-                </div>
-                <div class="col-sm-2">
-                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_restoran' %}">Detail</a></div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-2">
-                    <p class="mb-0">fauzan@gmail.com</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Fauzan</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Pelanggan</p>
-                </div>
-                <div id="3" class="col-sm-2">
-                    <p class="mb-0">Belum Terverifikasi</p>
-                </div>
-                <div class="col-sm-2">
-                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_pelanggan' %}">Detail</a></div>
-                    <div class="row"><button id="2" class="btn btn-primary" onclick='verification()'>Verifikasi</button></div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-2">
-                    <p class="mb-0">dian@gmail.com</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Dian</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Kurir</p>
-                </div>
-                <div class="col-sm-2">
-                    <p class="mb-0">Terverifikasi</p>
-                </div>
-                <div class="col-sm-2">
-                    <div class="row"><a class="btn btn-primary" href="{% url 'authentication:detail_kurir' %}">Detail</a></div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
 
 <script>
-    function verification(){
-        document.getElementById("3").innerHTML = "Terverifikasi";
-        document.getElementById("2").style.visibility = 'hidden';
+    async function verif(email) {
+        return fetch(`verification/${email}/`).then(verification(email));
+    }
+    async function verification(email){
+        var btn_verif = document.getElementById(email);
+        btn_verif.hidden = true;
+        document.getElementById(email+"_status").innerHTML = "Terverifikasi";
     }
 </script>
 {% endblock content %}
