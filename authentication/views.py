@@ -356,7 +356,7 @@ def all_user(request):
             SELECT *
             FROM USER_ACC;
         ''')
-    user_list = dict_fetch_all(cursor)
+        user_list = dict_fetch_all(cursor)
     return HttpResponse(serializers.serialize("json", user_list), content_type="application/json")
 
 
