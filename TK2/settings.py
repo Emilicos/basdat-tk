@@ -107,6 +107,12 @@ DATABASES = {
 import dj_database_url
 if PRODUCTION:
     DATABASES['default'] = dj_database_url.config(
+        engine='django.db.backends.postgresql',
+        name='railway',
+        user='postgres',
+        password='qedKf4ydIxFDx9kJEhLs',
+        host='containers-us-west-124.railway.app',
+        port='6592',
         conn_max_age=600
     )
 import sys
