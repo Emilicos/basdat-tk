@@ -4,7 +4,6 @@ from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 from utils.db_utils import dict_fetch_all
 import json
-import random
 
 # Create your views here.
 

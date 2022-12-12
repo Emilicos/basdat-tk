@@ -9,20 +9,20 @@
 <h2>Form Bahan Makanan</h2>
 <form method="POST" action="">
     {% csrf_token %}
-    {% for data in dummy %}
-        <p>Restoran - Cabang: {{ dummy.cabang-restoran }}</p>
-        <p>Nama Pelanggan: {{ dummy.nama-pelanggan }}</p>
-        <p>Waktu Pesanan Dibuat: {{ dummy.waktu-pesanan-dibuat }}</p>
-        {% if dummy.status-pesanan}
+    {% for data in transaction_food_no_dump %}
+        <div class = "flex gap-x-8"> 
+            <p>Restoran - Cabang: {{data.rname}} - {{data.rbranch}} </p>
+            <p>Nama Pelanggan: {{data.email}} </p>
+            <p>Waktu Pesanan Dibuat: {{data.datetime}} </p>
             <p>Status Pesanan: Pesanan Diantar</p>
-        <p>Aksi: 
-            <form>
-                <button type="button" href="#">Detail</button>
-                {% if dummy.status-pesanan}
-                    <button type="button" href="#">Selesai</button>
-                {% endif %}
-            </form>
-        </p>
+            <p>Aksi: 
+                <form>
+                    <a href="/transaksi-pesanan-kurir/transaksi_pesanan_detail/?waktu_pemesanan={{data.datetime}}&nama_pelanggan={{data.email}}&rname={{data.rname}}&rbranch={{data.rbranch}}&jalan={{data.jalan}}&kecamatan={{data.kecamatan}}&kota={{data.kota}}&provinsi={{data.provinsi}}&total_makanan={{data.total_makanan}}&total_diskon={{data.total_diskon}}&total_pengantaran={{data.total_pengantaran}}&total_harga={{data.total_harga}}&payment_method={{data.payment_method}}&payment_status={{data.payment_status}}&nama_kurir={{data.nama_kurir}}&platnomor={{data.platnomor}}&jenis_kendaraan={{data.jenis_kendaraan}}&merk_kendaraan={{data.merk_kendaraan}}&jalan_resto={{data.jalan_resto}}&district_resto={{data.district_resto}}&city_resto={{data.city_resto}}&province_resto={{data.province_resto}}">                     <button type="button">Detail</button>
+                     </a>
+                        <button type="button" href="#">Selesai</button>
+                </form>
+            </p>
+        </div>
     {% endfor %}
 </form>
 
