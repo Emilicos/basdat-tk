@@ -332,19 +332,5 @@ def verification(request, email):
             """)
     return HttpResponse()
 
-def detail_restoran(request):
-    context = {
-        'user': {
-            'role': 'Admin',
-        }
-    }
-    return render(request, 'dashboard_restoran.html', context)
 
-def detail_kurir(request):
-    context = {
-        'user': {
-            'role': 'Admin',
-        }
-    }
-    return render(request, 'dashboard_kurir.html', context)
 
