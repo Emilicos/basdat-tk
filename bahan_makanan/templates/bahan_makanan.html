@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Daftar Bahan Makanan</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+<h1>Daftar Bahan Makanan</h1>
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+
+<table class="table table-striped w-auto">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Bahan Makanan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in bahan %}
+        <tr>
+            <td>{{b.rname}}</td>
+            <td>{{b.rbranch}}</td>
+            <td>{{b.foodname}}</td>
+            <td>{{b.ingredient}}</td>
+            <td><a class="btn btn-primary" href="{% url 'BahanMakanan:hapus_bahan_makanan' %}">Hapus</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock content %}

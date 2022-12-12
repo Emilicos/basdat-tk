@@ -87,39 +87,3 @@ def show_form_bahan_makanan(request):
         }
     }
     return render(request, 'form_bahan_makanan.html', context)
-
-def show_daftar_bahan_makanan(request):
-
-    with connection.cursor() as cursor:
-        context = {
-            'user': {'role': 'Admin'}
-        }
-
-        cursor.execute("SET SEARCH_PATH TO SIREST;")
-        cursor.execute(f"""
-            SELECT rname, rbranch, foodname, ingredient
-            FROM FOOD_INGREDIENT;
-        """)
-
-        kategori = dictfetchall(cursor)
-        context['kategori'] = kategori
-
-        for i in range(len(kategori)):
-            context['kategori'][i]['nomor'] = str(i+1)
-
-        cursor.execute("SET SEARCH_PATH TO PUBLIC")
-
-    return render(request, 'bahan_makanan.html', context)
-
-def hapus_bahan_makanan(request, id):
-
-    with connection.cursor() as cursor:
-        cursor.execute("SET SEARCH_PATH TO SIREST;")
-        cursor.execute(f"""
-            DELETE FROM FOOD_INGREDIENT
-            WHERE rname={rname};
-        """)
-        cursor.execute("SET SEARCH_PATH TO PUBLIC")
-
-    messages.info(request, 'Berhasil menghapus kategori restoran!')
-    return redirect('KategoriRestoran:show_daftar_bahan_makanan')
