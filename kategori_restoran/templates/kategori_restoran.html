@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Daftar Kategori Restoran</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container py-5">
+<h1>Daftar Kategori Restoran</h1>
+
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+
+<table class="table table-striped w-auto">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Kategori Restoran</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for k in kategori %}
+        <tr>
+            <td>{{k.nomor}}</td>
+            <td>{{k.name}}</td>
+            <td><a class="btn btn-primary" href="{% url 'KategoriRestoran:hapus_kategori_restoran' %}">Hapus</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock content %}
