@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+APP_NAME = 'sirest-a03'
+CSRF_TRUSTED_ORIGINS = [f'https://{APP_NAME}.up.railway.app']
 
 # Application definition
 
@@ -104,11 +106,17 @@ DATABASES = {
 
 # Set database settings automatically using DATABASE_URL.
 
-import dj_database_url
-if PRODUCTION:
-    DATABASES['default'] = dj_database_url.config(
-        conn_max_age=600
-    )
+# import dj_database_url
+# if PRODUCTION:
+#     DATABASES['default'] = dj_database_url.config(
+#         engine='django.db.backends.postgresql',
+#         name='railway',
+#         user='postgres',
+#         password='qedKf4ydIxFDx9kJEhLs',
+#         host='containers-us-west-124.railway.app',
+#         port='6592',
+#         conn_max_age=600
+#     )
 import sys
 if 'test' in sys.argv:
     DATABASES['default'] = {

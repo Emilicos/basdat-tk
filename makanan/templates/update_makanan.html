@@ -4,7 +4,7 @@
 <html>
 <head>
     {% block meta %}
-    <title> Buat Makanan </title> 
+    <title> Update Makanan </title> 
     {% endblock meta %}
 </head>
 
@@ -15,23 +15,23 @@
         <div class = "max-w-720px p-8 w-full bg-main rounded-md font-bold">
             <div id = "errorMessage"> </div>
             <form id = "idSubmit" action = '/tarif/' class = "flex flex-col">
-                <h2 class = "text-center font-bold"> Form Buat Makanan </h2>
+                <h2 class = "text-center font-bold"> Form Update Makanan </h2>
                 <div id = "idTambah">
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                       <label for="namaMakananForm"> Nama Makanan: </label>
-                      <input type="text" class="form-control" id="namaMakananForm" aria-describedby="namaMakanan" placeholder="Masukkan nama makanan" aria-required="Input Tidak Boleh Kosong!" >
+                      <input type="text" class="form-control" id="namaMakananForm" aria-describedby="namaMakanan" placeholder="Masukkan nama makanan" aria-required="Input Tidak Boleh Kosong!" value = "{{foodname}}" disabled>
                     </div>
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                         <label for="deskripsiForm"> Deskripsi Makanan: </label>
-                        <input type="text" class="form-control" id="deskripsiForm" aria-describedby="deskripsi" placeholder="Masukkan deskripsi makanan" aria-required="Input Tidak Boleh Kosong!" >
+                        <input type="text" class="form-control" id="deskripsiForm" aria-describedby="deskripsi" placeholder="Masukkan deskripsi makanan" aria-required="Input Tidak Boleh Kosong!" value = "{{description}}">
                     </div>
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                       <label for="stokForm"> Stok: </label>
-                      <input type="number" class="form-control" id="stokForm" aria-describedby="stok" placeholder="Masukkan stok makanan" aria-required="Input Tidak Boleh Kosong!"  >
+                      <input type="number" class="form-control" id="stokForm" aria-describedby="stok" placeholder="Masukkan stok makanan" aria-required="Input Tidak Boleh Kosong!" value = "{{stock}}" >
                     </div>
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                       <label for="hargaForm"> Harga: </label>
-                      <input type="number" class="form-control" id="hargaForm" aria-describedby="harga" placeholder="Masukkan harga makanan" aria-required="Input Tidak Boleh Kosong!" >
+                      <input type="number" class="form-control" id="hargaForm" aria-describedby="harga" placeholder="Masukkan harga makanan" aria-required="Input Tidak Boleh Kosong!" value = "{{price}}" >
                     </div>
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                         <label for="selectKategoriMakananForm"> Kategori makanan: </label>
@@ -41,14 +41,13 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="form-group mt-4 flex justify-center items-center gap-x-4">
-                        <label for="selectBahanMakananForm"> Bahan makanan: </label>
-                        <select id = "selectBahanMakananForm" class="form-select" aria-label="Default select example">
-                            {% for ingredient in ingredient_no_dumps %}
-                                <option value = "{{ingredient.id}}"> {{ingredient.name}} </option>
-                            {% endfor %}
-                        </select>
+                {% for item in ingredient_item %}
+                    <div id = "parent{{forloop.counter}}" class="form-group mt-4 flex justify-center items-center gap-x-4 items-center">
+                            <label for="hargaForm"> Bahan Makanan: </label>
+                            <input type="text" value = "{{item.name}}" class="form-control" disabled>
+                            <p id = "item{{forloop.counter}}" class = "text-2xl font-bold bg-blue-500 text-white px-8 cursor-pointer"> - </p> 
                     </div>
+                {% endfor %}
                 </div>
                 <div class = "text-white font-bold p-8 rounded-full cursor-pointer" id = "tambah">
                     <svg class = "bg-blue-500" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-plus-lg" viewBox="0 0 16 16" fill="currentColor">
@@ -66,12 +65,30 @@
       var count = 0;
       var dataIngredient = String.raw`{{ingredient| safe}}`
       var parsedIngredient = JSON.parse(dataIngredient)
-    
+      var visible = false
       var dataFoodCategory = String.raw`{{food_category| safe}}`
       var parsedFoodCategory = JSON.parse(dataFoodCategory)
 
+      var ingredientDumps = String.raw`{{ingredient_dumps| safe}}`
+      var parsedIngredientDumps = JSON.parse(ingredientDumps)
+    
+      var ingredientDumpsSet = new Set()
+      for(let i = 1; i <= parsedIngredientDumps.length; i++){
+        document.getElementById(`item${i}`).style.display = "none"
+        ingredientDumpsSet.add(parsedIngredientDumps[i-1].id)
+        $(`#item${i}`).click(function(){
+            document.getElementById(`parent${i}`).style.display = "none"
+            ingredientDumpsSet.delete(parsedIngredientDumps[i-1].id)
+        })  
+      }
 
+      function toggleTambah(){
+        for(let i = 1; i <= parsedIngredientDumps.length; i++){
+            document.getElementById(`item${i}`).style.display = "initial"
+        }
+      }
       $("#tambah").click(function(){
+        toggleTambah();
         var text = `
         <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                 <label> Bahan makanan: </label>
@@ -87,6 +104,10 @@
       })
 
       $(document).ready(function () {
+        $("#selectKategoriMakananForm").val("{{food_category_id}}")
+      })
+
+      $(document).ready(function () {
 
         $("#idSubmit").submit(function(e){
             e.preventDefault()
@@ -95,33 +116,44 @@
             var stok = $("#stokForm").val()
             var harga = $("#hargaForm").val()
             var kategoriMakanan = $("#selectKategoriMakananForm").val()
-            var bahanMakanan = $("#selectBahanMakananForm").val()
             
             var semuaBahanMakanan = new Set()
+            let semuaBahanMakananNew;
+            
+            for(let i = 0; i < count; i++){
+                semuaBahanMakanan.add($(`#selectBahanMakananForm${i}`).val())
+            }
 
-            if(namaMakanan === "" || deskripsiMakanan === "" || stok === "" || harga === "" || kategoriMakanan === "" || bahanMakanan === "default"){
+            semuaBahanMakananNew = new Set([...semuaBahanMakanan, ...ingredientDumpsSet]);
+
+            const lengthReal = semuaBahanMakananNew.size
+            const lengthTotal = semuaBahanMakanan.size + ingredientDumpsSet.size
+
+            if(namaMakanan === "" || deskripsiMakanan === "" || stok === "" || harga === "" || kategoriMakanan === ""){
                 $("#errorMessage").html("")
                 const text = `<p class = "text-white font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
                 $(text).appendTo("#errorMessage")
+            }else if(lengthReal != lengthTotal){
+                $("#errorMessage").html("")
+                const text = `<p class = "text-white font-bold text-center"> Data Bahan Makanan tidak boleh sama, silakan sesuaikan data terlebih dahulu. </p>`
+                $(text).appendTo("#errorMessage")
             }else{
-                semuaBahanMakanan.add(bahanMakanan)
-                for(let i = 0; i < count; i++){
-                    semuaBahanMakanan.add($(`#selectBahanMakananForm${i}`).val())
-                }
-                semuaBahanMakanan = Array.from(semuaBahanMakanan)
+            
+                semuaBahanMakananNew = Array.from(semuaBahanMakananNew)
+
                 let bahanMakananDalamString = ""
-                for(let i = 0; i < semuaBahanMakanan.length; i++){
-                    if(i != semuaBahanMakanan.length - 1){
+                for(let i = 0; i < semuaBahanMakananNew.length; i++){
+                    if(i != semuaBahanMakananNew.length - 1){
                         bahanMakananDalamString += 
-                        `${semuaBahanMakanan[i]}, `
+                        `${semuaBahanMakananNew[i]}, `
                     }else{
-                        bahanMakananDalamString += `${semuaBahanMakanan[i]}`
+                        bahanMakananDalamString += `${semuaBahanMakananNew[i]}`
                     }
                 }
                 try{
                     $.ajax({
                         type: "POST",
-                        url: "/makanan/create/",
+                        url: "/makanan/restoran/update/",
                         data: {
                         "foodname": namaMakanan,
                         "description": deskripsiMakanan,
