@@ -3,31 +3,57 @@
 
 {% block meta %}
 <title>Jam Operasional: Daftar</title>
+<script>
+    function deleteHours(day) {
+        $.ajax({
+            method: 'DELETE',
+            url: `{% url 'jam_operasional:jam_operasional_hapus' %}`,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {
+                day: day,
+            },
+            success: function(data) {
+                window.location = `{% url 'jam_operasional:jam_operasional_daftar' %}`;
+            },
+            error: function(error) {
+                window.location = `{% url 'jam_operasional:jam_operasional_daftar' %}`;
+            }
+        });
+    }
+</script>
 {% endblock meta %}
 
 {% block content %}
-<h1 class="text-center">Daftar Jam Operasional</h1>
-<table>
-    <tr>
-        <th>No</th>
-        <th>Hari</th>
-        <th>Jam Buka</th>
-        <th>Jam Tutup</th>
-        <th>Aksi</th>
-    </tr>
-    {% for dummy in dummy_list %}
-        <tr>
-            <td>{{ dummy.id }}</td>
-            <td>{{ dummy.hari }}</td>
-            <td>{{ dummy.jam_buka }}</td>
-            <td>{{ dummy.jam_tutup }}</td>
-            <td>
-                <div class="d-flex flex-column align-items-center">
-                    <a href="{% url 'jam_operasional:jam_operasional_ubah' dummy.id %}"><button>Ubah</button></a>
-                    <a href="{% url 'jam_operasional:jam_operasional_hapus' dummy.id %}"><button>Hapus</button></a>
-                </div>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+<h1 class="text-center mt-4">Daftar Jam Operasional</h1>
+<div class="d-flex justify-content-center">
+    <table class="table w-75 mt-4">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Hari</th>
+                <th>Jam Buka</th>
+                <th>Jam Tutup</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hours in hours_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ hours.day }}</td>
+                    <td>{{ hours.formattedstarthours }}</td>
+                    <td>{{ hours.formattedendhours }}</td>
+                    <td>
+                        <div class="d-flex flex-column align-items-start">
+                            <a href="{% url 'jam_operasional:jam_operasional_ubah' %}?day={{ hours.day }}"><button class="w-100 btn btn-dark">Ubah</button></a>
+                            <a><button class="w-100 btn btn-dark mt-2" onclick="deleteHours('{{ hours.day }}');">Hapus</button></a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
