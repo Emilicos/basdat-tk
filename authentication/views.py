@@ -2,7 +2,9 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
 from utils.db_utils import dict_fetch_all
-
+from django.views.decorators.csrf import csrf_exempt
+from utils.users import get_user_role
+from django.contrib import messages
 from utils.users import *
 
 # Home
@@ -25,12 +27,12 @@ def show_login(request):
                 WHERE Email='{email}' AND Password='{password}';
             ''')
             user_list = dict_fetch_all(cursor)
-        if len(user_list) != 0: # User found
+        if len(user_list) != 0:  # User found
             response.set_cookie('email', email)
             response.set_cookie('password', password)
             response.status_code = 200
             return response
-        else: # User not found
+        else:  # User not found
             response.delete_cookie('email')
             response.delete_cookie('password')
             response.status_code = 404
@@ -48,10 +50,70 @@ def logout_user(request):
 def show_register(request):
     return render(request, 'register.html', {})
 
+@csrf_exempt
 def registrasi_admin(request):
+
+    if request.method == 'POST':
+        email = request.POST.get("emailForm")
+        password = request.POST.get("passwordForm")
+        nama = request.POST.get("namaForm").split(" ")
+        noHP = request.POST.get("nomorForm")
+
+        if(email != "" and password != "" and nama[0] != "" and nama[1] != "" and noHP != ""):
+            with connection.cursor() as cursor:
+                try:
+                    cursor.execute("SET SEARCH_PATH TO SIREST;")
+                    cursor.execute(f"""
+                        INSERT INTO USER_ACC VALUES ('{email}','{password}',{noHP},'{nama[0]}', '{nama[1]}');
+                        INSERT INTO ADMIN VALUES ('{email}');
+                    """)
+
+                    request.COOKIES['email'] = email
+                    request.COOKIES['password'] = password
+
+                    cursor.execute("SET SEARCH_PATH TO PUBLIC;")
+                    return redirect('authentication:dashboard')
+                except Exception as e:
+                    print(e)
+                    res = str(e).split("\n")[0]
+                    messages.info(request, res)
+        else:
+            messages.info(request, 'Field tidak boleh kosong!')
+
     return render(request, 'registrasi_admin.html', {})
 
 def registrasi_pelanggan(request):
+
+    if request.method == 'POST':
+
+        email = request.POST.get("emailForm")
+        password = request.POST.get("passwordForm")
+        nama = request.POST.get("namaForm").split(" ")
+        noHP = request.POST.get("nomorForm")
+        nik = request.POST.get("nikForm")
+        namaBank = request.POST.get("bankForm")
+        noRek = request.POST.get("noRekForm")
+        tanggalLahir = request.POST.get("dateForm")
+        jenisKelamin = request.POST.get("selectForm")
+
+        with connection.cursor() as cursor:
+            cursor.execute("SET SEARCH_PATH TO SIREST;")
+            cursor.execute(f"""
+                INSERT INTO USER_ACC VALUES ('{email}','{password}',{noHP},'{nama[0]}', '{nama[1]}');
+                INSERT INTO TRANSACTION_ACTOR (email, nik, bankname, accountno) VALUES
+                    ('{email}', {nik}, '{namaBank}', {noRek});
+                INSERT INTO CUSTOMER VALUES
+                    ('{email}','{tanggalLahir} 00:00:00','{jenisKelamin}');
+            """)
+
+            response = HttpResponse()
+            response.set_cookie('email', email)
+            response.set_cookie('password', password)
+            response.status_code = 200
+
+            cursor.execute("SET SEARCH_PATH TO PUBLIC;")
+        return redirect('authentication:dashboard')
+
     return render(request, 'registrasi_pelanggan.html', {})
 
 def registrasi_restoran(request):
@@ -62,6 +124,7 @@ def registrasi_kurir(request):
 
 def dashboard(request):
     email = request.COOKIES['email']
+
     role = get_user_role(email)
     context = {
         'user': {
