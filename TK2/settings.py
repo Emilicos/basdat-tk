@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'resto_pay',
     'jam_operasional',
     'transaksi_pesanan',
+    'transaksi_pesanan_kurir',
 ]
 
 MIDDLEWARE = [

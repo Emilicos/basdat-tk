@@ -28,4 +28,5 @@ urlpatterns = [
     path('resto-pay/', include('resto_pay.urls')),
     path('jam-operasional/', include('jam_operasional.urls')),
     path('transaksi-pesanan/', include('transaksi_pesanan.urls')),
+    path('transaksi-pesanan-kurir/', include('transaksi_pesanan_kurir.urls')),
 ]
