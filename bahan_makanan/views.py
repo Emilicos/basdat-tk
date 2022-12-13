@@ -1,7 +1,7 @@
-import datetime, json
+import datetime
 from distutils.command.clean import clean
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -11,6 +11,8 @@ from django.db import connection
 from datetime import datetime
 import random
 import string
+from django.views.decorators.csrf import csrf_exempt
+
 
 def dictfetchall(cursor): 
     "Returns all rows from a cursor as a dict" 
@@ -20,13 +22,22 @@ def dictfetchall(cursor):
             for row in cursor.fetchall() 
     ]
 
+@csrf_exempt
 def show_form_bahan_makanan(request):
     if request.method == 'POST':
         namaBahan = request.POST.get('namaBahan')
-        if namaBahan != "":
-            return redirect('KategoriMakanan:show_daftar_bahan_makanan')
-        else:
-            messages.info(request, 'Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu.')
+        print(namaBahan)
+        id = "i" + f"{random.randint(1, 1000000)}"
+        with connection.cursor() as cursor:
+                cursor.execute("SET SEARCH_PATH TO SIREST;")
+                cursor.execute(f"""
+                INSERT INTO INGREDIENT VALUES
+                ('{id}', '{namaBahan}');
+                 """)
+                cursor.execute("SET SEARCH_PATH TO PUBLIC;")
+        return JsonResponse({
+                    "message": "Successful"
+                })
     context = {
         'user': {
             'role': 'Admin',
@@ -41,31 +52,43 @@ def show_daftar_bahan_makanan(request):
             'user': {'role': 'Admin'}
         }
 
+        
         cursor.execute("SET SEARCH_PATH TO SIREST;")
         cursor.execute(f"""
-            SELECT rname, rbranch, foodname, ingredient
-            FROM FOOD_INGREDIENT;
+            SELECT *
+            FROM INGREDIENT;
         """)
 
         bahan = dictfetchall(cursor)
         context['bahan'] = bahan
 
-        # for i in range(len(kategori)):
-        #     context['kategori'][i]['nomor'] = str(i+1)
 
         cursor.execute("SET SEARCH_PATH TO PUBLIC")
+        for item in bahan :
+                cursor.execute("SET SEARCH_PATH TO SIREST;")
+                cursor.execute(f"""
+                        SELECT *
+                        FROM FOOD_INGREDIENT
+                        WHERE INGREDIENT = '{item['id']}';
+                    """)
+                transaction_food_data = dictfetchall(cursor)
+                if(len(transaction_food_data) > 0):
+                    item['referred'] = True
+                else:
+                    item['referred'] = False
+
 
     return render(request, 'bahan_makanan.html', context)
 
-def hapus_bahan_makanan(request):
+def hapus_bahan_makanan(request, id): # TODO syntax delete makanan dengan if variable di branch FOOD_INGREDIENT dia equals / viable dengan yg ada di FOOD db
 #kalo udah di refer sama makanan baru gabisa dihapus
     with connection.cursor() as cursor:
         cursor.execute("SET SEARCH_PATH TO SIREST;")
         cursor.execute(f"""
-            DELETE FROM FOOD_INGREDIENT
-            WHERE rname={rname};
+            DELETE FROM INGREDIENT
+            WHERE id='{id}';
         """)
         cursor.execute("SET SEARCH_PATH TO PUBLIC")
 
     messages.info(request, 'Berhasil menghapus bahan makanan!')
-    return redirect('bahan_makanan:show_daftar_bahan_makanan')
+    return redirect('bahan_makanan:show_form_daftar_makanan')

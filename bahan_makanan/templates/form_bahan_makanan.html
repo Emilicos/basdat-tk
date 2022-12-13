@@ -5,14 +5,18 @@
 <title>Form Bahan Makanan</title>
 {% endblock meta %}
 
+<body>
 {% block content %}
 <div class="container py-5">
 <h2>Form Bahan Makanan</h2>
-<form method="POST" action="">
+<form id = "idSubmit" method="POST" action="">
     {% csrf_token %}
-    <p>Nama : </p>
-    <input type="text" name="namaBahan" placeholder="Masukkan nama bahan" class="form-control">
-    <button type="submit" class="btn btn-primary">Simpan</button>
+    <p>Nama Bahan Makanan: </p>
+    <input type="text" name="namaBahan" id="namaBahan" placeholder="Masukkan Nama Bahan Makanan" class="form-control">
+    <p></p>
+    <center>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </center>
 </form>
 
 {% if messages %}
@@ -24,4 +28,40 @@
 {% endif %} 
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+      $("#idSubmit").submit(function(e){
+          e.preventDefault()
+          var namaBahan = $("#namaBahan").val()
+          if (namaBahan !== ""){
+              try{
+                  $.ajax({
+                      type: "POST",
+                      url: "/bahan-makanan/form/",
+                      data: {
+                      "namaBahan": namaBahan,
+                      },
+                      success: function(data){
+                          window.location.href = window.location.protocol + "//" + window.location.host + "/" + "bahan-makanan/daftar/"
+                      },
+                      error: function(error){
+                      alert(error)
+                      }
+                  })
+              }catch (error){
+                  alert(error)
+              }
+            }
+            else {
+                alert("nama bahan makanan tidak boleh kosong")
+            } 
+              // window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/"
+          }
+          )
+      });
+  </script>
+
 {% endblock content %}
+</body>
