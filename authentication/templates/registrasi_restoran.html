@@ -16,7 +16,7 @@
     <div class = "flex justify-center">
         <div class = "max-w-720px p-8 w-full bg-main rounded-md font-bold flex-col">
             <div id = "errorMessage"> </div>
-            <form id = "idSubmit" action = '/dashboardrestoran/' class = "flex flex-col">
+            <form id = "idSubmit" method="POST" action="" class = "flex flex-col">
                 <h2 class = "text-center font-bold"> Form Registrasi Restoran </h2>
                 <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                     <label for="emailForm"> Email: </label>
@@ -119,7 +119,7 @@
             const text = `<p class = "text-white font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
             $(text).appendTo("#errorMessage")
           }else{
-            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "dashboardrestoran/"
+            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "dashboard/"
           }
         })
     </script>
