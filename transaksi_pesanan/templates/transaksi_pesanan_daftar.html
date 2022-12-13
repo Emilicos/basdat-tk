@@ -3,41 +3,70 @@
 
 {% block meta %}
 <title>Transaksi Pesanan: Daftar</title>
+<script>
+    function updateTransaction(email, time) {
+        $.ajax({
+            method: 'PUT',
+            url: "{% url 'transaksi_pesanan:transaksi_pesanan_detail' %}",
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            data: {
+                email: email,
+                time: time,
+            },
+            success: function(data) {
+                window.location.reload();
+            },
+            error: function(error) {
+                alert('Cannot send request to server');
+            }
+        });
+    }
+</script>
 {% endblock meta %}
 
 {% block content %}
-<h1 class="text-center">Daftar Transaksi Pesanan</h1>
-<table>
-    <tr>
-        <th>No</th>
-        <th>Nama Pelanggan</th>
-        <th>Waktu Pesanan Dibuat</th>
-        <th>Status Pesanan</th>
-        <th>Aksi</th>
-    </tr>
-    {% for dummy in dummy_list %}
-        <tr>
-            <td>{{ dummy.id }}</td>
-            <td>{{ dummy.nama }}</td>
-            <td>{{ dummy.waktu }}</td>
-            <td>{{ dummy.status_pesanan }}</td>
-            <td>
-                <div class="d-flex flex-column align-items-center">
-                    <a href="{% url 'transaksi_pesanan:transaksi_pesanan_detail' dummy.id %}"><button>Detail</button></a>
-                    {% if dummy.status_pesanan != 'Pesanan Diantar' %}
-                        <a href="">
-                            <button>
-                                {% if dummy.status_pesanan == 'Menunggu Konfirmasi Restoran' %}
+<h1 class="text-center mt-4">Daftar Transaksi Pesanan</h1>
+<div class="d-flex justify-content-center">
+    <table class="table w-75 mt-4">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Pelanggan</th>
+                <th>Waktu Pesanan Dibuat</th>
+                <th>Status Pesanan</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transaction_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ transaction.fname }} {{ transaction.lname }}</td>
+                    <td>{{ transaction.formatteddatetime }}</td>
+                    <td>{{ transaction.transactionstatus }}</td>
+                    <td>
+                        <div class="d-flex flex-column align-items-center">
+                            <a class="w-100" href="{% url 'transaksi_pesanan:transaksi_pesanan_detail' %}?email={{ transaction.email }}&time={{ transaction.time }}">
+                                <button class="w-100 btn btn-dark">
+                                    Detail
+                                </button>
+                            </a>
+                            {% if transaction.transactionstatus == 'Menunggu Konfirmasi Resto'  %}
+                                <button class="w-100 btn btn-dark mt-2" onclick="updateTransaction('{{ transaction.email }}', '{{ transaction.time }}');">
                                     Konfirmasi
-                                {% elif dummy.status_pesanan == 'Pesanan Dibuat' %}
+                                </button>
+                            {% elif transaction.transactionstatus == 'Pesanan Dibuat' %}
+                                <button class="w-100 btn btn-dark mt-2" onclick="updateTransaction('{{ transaction.email }}', '{{ transaction.time }}');">
                                     Kirim
-                                {% endif %}
-                            </button>
-                        </a>
-                    {% endif %}
-                </div>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
