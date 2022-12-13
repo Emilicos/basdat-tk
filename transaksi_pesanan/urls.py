@@ -5,5 +5,5 @@ app_name = 'transaksi_pesanan'
 
 urlpatterns = [
     path('', transaksi_pesanan_daftar, name='transaksi_pesanan_daftar'),
-    path('<int:id>/', transaksi_pesanan_detail, name='transaksi_pesanan_detail'),
+    path('detail/', transaksi_pesanan_detail, name='transaksi_pesanan_detail'),
 ]

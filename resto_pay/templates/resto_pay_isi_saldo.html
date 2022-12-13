@@ -3,15 +3,44 @@
 
 {% block meta %}
 <title>RestoPay: Isi Saldo</title>
+<script>
+    function showError(message) {
+        $('#error-message').text(message);
+    }
+    
+    $(document).ready(function() {
+        $('#form').submit(function(event) {
+            event.preventDefault();
+            const nominal = $('#nominal').val();
+            $.ajax({
+                method: 'POST',
+                url: "{% url 'resto_pay:resto_pay_isi_saldo' %}",
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                data: {
+                    nominal: nominal,
+                },
+                success: function(data) {
+                    window.location.href = `{% url 'resto_pay:resto_pay_isi_saldo' %}`;
+                },
+                error: function(error) {
+                    showError(error.responseJSON.message);
+                }
+            });
+        });
+    });
+</script>
 {% endblock meta %}
 
 {% block content %}
 <h1 class="text-center">Form Isi Saldo</h1>
-<form action="" method="POST" class="d-flex flex-column">
+<form id="form" action="" method="POST" class="d-flex flex-column">
     <span>Saldo: {{ saldo }}</span>
     <div class="mb-3">
         <label for="nominal">Nominal Pengisian:</label>
-        <input id="nominal" type="text" name="nominal">
+        <input id="nominal" type="number" name="nominal" required>
+        <p id="error-message"></p>
     </div>
     <span>dari:</span>
     <span>Nama Bank: {{ bank_nama }}</span>

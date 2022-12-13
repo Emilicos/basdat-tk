@@ -1,10 +1,9 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.db import connection
-import json
-
 from utils.db_utils import dict_fetch_all
-from utils.users import get_user_role
+
+from utils.users import *
 
 # Home
 def show_login_register(request):

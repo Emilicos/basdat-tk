@@ -19,7 +19,7 @@
       <a class="navbar-brand" href="#" style="font-weight:700"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                {% if user.role == 'Admin' %}
+                {% if user.role == 'Admin' or user.role == 'admin' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
                       <li class="nav-item dropdown">
@@ -55,7 +55,7 @@
                         </ul>
                       </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
-                {% elif user.role == 'Kurir' %}
+                {% elif user.role == 'Kurir' or user.role == 'courier' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="/restoran/pelanggan/">Daftar Restoran dan Makanan</a></li>
@@ -70,7 +70,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'resto_pay:resto_pay' %}">RestoPay</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
-                {% elif user.role == 'Pelanggan' %}
+                {% elif user.role == 'Pelanggan' or user.role == 'customer' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="/restoran/">Daftar Restoran dan Makanan</a></li>
@@ -86,7 +86,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'resto_pay:resto_pay' %}">RestoPay</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:show_login_register' %}">Logout</a></li>
-                {% elif user.role == 'Restoran' %}
+                {% elif user.role == 'Restoran' or user.role == 'restaurant' %}
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
                     <li class="nav-item dropdown">
