@@ -3,6 +3,8 @@ from django.http import HttpResponse, JsonResponse
 from django.db import connection
 from utils.db_utils import dict_fetch_all
 
+from utils.users import *
+
 # Home
 def show_login_register(request):
     return render(request, 'login_register.html', {})

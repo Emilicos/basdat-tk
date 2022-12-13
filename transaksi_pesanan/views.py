@@ -13,7 +13,7 @@ def transaksi_pesanan_daftar(request):
     password = request.COOKIES.get('password')
     if not check_user_availability(email, password):
         return HttpResponse(status=404)
-    if get_user_role(email) != 'restaurant':
+    if get_user_role(email) != 'Restoran':
         return HttpResponse(status=404)
     (restaurant_name, restaurant_branch) = get_rname_rbranch(email)
     if restaurant_name is None or restaurant_branch is None:
@@ -73,7 +73,7 @@ def transaksi_pesanan_detail(request):
     password = request.COOKIES.get('password')
     if not check_user_availability(email, password):
         return HttpResponse(status=404)
-    if get_user_role(email) != 'restaurant':
+    if get_user_role(email) != 'Restoran':
         return HttpResponse(status=404)
     (restaurant_name, restaurant_branch) = get_rname_rbranch(email)
     if restaurant_name is None or restaurant_branch is None:
