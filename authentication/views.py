@@ -44,6 +44,7 @@ def logout_user(request):
     response = HttpResponse(status=200)
     response.delete_cookie('email')
     response.delete_cookie('password')
+    print("tes")
     return redirect('authentication:show_login_register')
 
 # Create your views here.
@@ -68,11 +69,14 @@ def registrasi_admin(request):
                         INSERT INTO ADMIN VALUES ('{email}');
                     """)
 
-                    request.COOKIES['email'] = email
-                    request.COOKIES['password'] = password
+                    response = HttpResponse()
+                    response.set_cookie('email', email)
+                    response.set_cookie('password', password)
+                    response.status_code = 200
 
                     cursor.execute("SET SEARCH_PATH TO PUBLIC;")
-                    return redirect('authentication:dashboard')
+                    dashboard(request)
+                    return response
                 except Exception as e:
                     print(e)
                     res = str(e).split("\n")[0]

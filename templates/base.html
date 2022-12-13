@@ -27,12 +27,12 @@
                           Restoran
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Daftar Kategori Restoran</a></li>
-                          <li><a class="dropdown-item" href="#">Buat Kategori Restoran</a></li>
+                          <li><a class="dropdown-item" href="/kategori-restoran/daftar/">Daftar Kategori Restoran</a></li>
+                          <li><a class="dropdown-item" href="/kategori-restoran/form/">Buat Kategori Restoran</a></li>
                           <li><a class="dropdown-item" href="{% url 'KategoriMakanan:show_daftar_kategori_makanan' %}">Daftar Kategori Makanan</a></li>
                           <li><a class="dropdown-item" href="{% url 'KategoriMakanan:show_form_kategori_makanan' %}">Buat Kategori Makanan</a></li>
-                          <li><a class="dropdown-item" href="#">Daftar Bahan Makanan</a></li>
-                          <li><a class="dropdown-item" href="#">Buat Bahan Makanan</a></li>
+                          <li><a class="dropdown-item" href="/bahan-makanan/daftar/">Daftar Bahan Makanan</a></li>
+                          <li><a class="dropdown-item" href="/bahan-makanan/form/">Buat Bahan Makanan</a></li>
                           <li><a class="dropdown-item" href="/restoran/">Daftar Restoran dan Makanan</a></li>
                         </ul>
                       </li>
@@ -46,7 +46,7 @@
                         </ul>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Pesanan
                         </a>
                         <ul class="dropdown-menu">
@@ -60,11 +60,11 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="/restoran/pelanggan/">Daftar Restoran dan Makanan</a></li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Pesanan
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Pesanan Berlangsung</a></li>
+                        <li><a class="dropdown-item" href="transaksi_pesanan_kurir/transaksi_pesanan/">Pesanan Berlangsung</a></li>
                         <li><a class="dropdown-item" href="#">Riwayat Pesanan</a></li>
                       </ul>
                     </li>
@@ -81,7 +81,7 @@
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'TransaksiPelanggan:buat_pesanan' %}">Buat Pesanan</a></li>
                         <li><a class="dropdown-item" href="{% url 'TransaksiPelanggan:pesanan_berlangsung' %}">Pesanan Berlangsung</a></li>
-                        <li><a class="dropdown-item" href="#">Riwayat Pesanan</a></li>
+                        <li><a class="dropdown-item" href="transaksi_pesanan_kurir/transaksi_pesanan/">Riwayat Pesanan</a></li>
                       </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'resto_pay:resto_pay' %}">RestoPay</a></li>
@@ -90,7 +90,7 @@
                     <li class="nav-item active"><a class="nav-link" href="#">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Jam Operasional
                       </a>
                       <ul class="dropdown-menu">
@@ -99,7 +99,7 @@
                       </ul>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Makanan
                       </a>
                       <ul class="dropdown-menu">
@@ -108,7 +108,7 @@
                       </ul>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Pesanan
                       </a>
                       <ul class="dropdown-menu">
