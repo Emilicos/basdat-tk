@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, QueryDict
 from django.utils import timezone
 import datetime
+import random
 from utils.users import *
 
 DUMMY_LIST = [
@@ -344,17 +345,52 @@ def transaksi_pesanan_detail(request):
         last_ts_id = transaction_history['id']
         if last_ts_id == 'TS1' or last_ts_id == 'TS2':
             if last_ts_id == 'TS1':
-                new_ts_id = 'TS2'
+                try:
+                    with connection.cursor() as cursor:
+                        cursor.execute('SET SEARCH_PATH TO SIREST;')
+                        cursor.execute(f'''
+                            INSERT INTO TRANSACTION_HISTORY VALUES
+                            ('{transaction_email}', '{transaction_datetime}', 'TS2', '{history_datetime}');
+                        ''')
+                    return HttpResponse(status=201)
+                except Exception as e:
+                    return HttpResponse(status=400)
             elif last_ts_id == 'TS2':
-                new_ts_id = 'TS3'
-            try:
-                with connection.cursor() as cursor:
-                    cursor.execute('SET SEARCH_PATH TO SIREST;')
-                    cursor.execute(f'''
-                        INSERT INTO TRANSACTION_HISTORY VALUES
-                        ('{transaction_email}', '{transaction_datetime}', '{new_ts_id}', '{history_datetime}');
-                    ''')
-                return HttpResponse(status=201)
-            except Exception as e:
-                return HttpResponse(status=400)
+                # List Kurir
+                try:
+                    with connection.cursor() as cursor:
+                        cursor.execute('SET SEARCH_PATH TO SIREST;')
+                        cursor.execute(f'''
+                            SELECT Email
+                            FROM COURIER;
+                        ''')
+                        courier_list = dict_fetch_all(cursor)
+                        if len(courier_list) == 0:
+                            raise Exception('Courier Not Found')
+                except Exception as e:
+                    return HttpResponse(status=400)
+                # Pengacakan Courier
+                courier_email = courier_list[random.randint(0, len(courier_list) - 1)]['email']
+                # Update Courier
+                try:
+                    with connection.cursor() as cursor:
+                        cursor.execute('SET SEARCH_PATH TO SIREST;')
+                        cursor.execute(f'''
+                            UPDATE TRANSACTION
+                            SET CourierId='{courier_email}'
+                            WHERE Email='{transaction_email}' AND Datetime='{transaction_datetime}';
+                        ''')
+                except Exception as e:
+                    return HttpResponse(status=400)
+                # Update Status
+                try:
+                    with connection.cursor() as cursor:
+                        cursor.execute('SET SEARCH_PATH TO SIREST;')
+                        cursor.execute(f'''
+                            INSERT INTO TRANSACTION_HISTORY VALUES
+                            ('{transaction_email}', '{transaction_datetime}', 'TS3', '{history_datetime}');
+                        ''')
+                    return HttpResponse(status=201)
+                except Exception as e:
+                    return HttpResponse(status=400)
     return HttpResponse(status=404)
