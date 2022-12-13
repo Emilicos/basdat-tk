@@ -29,11 +29,10 @@
         {% for b in bahan %}
         <tr>
             <td>{{b.nomor}}</td>
-            <td>{{b.rname}}</td>
-            <td>{{b.rbranch}}</td>
-            <td>{{b.foodname}}</td>
-            <td>{{b.ingredient}}</td>
-            <td><a class="btn btn-primary" href="{% url 'bahan_makanan:hapus_bahan_makanan' %}">Hapus</a></td>
+            <td>{{b.name}}</td>
+            {% if not b.referred %}
+            <td><a class="btn btn-primary" href="/bahan-makanan/hapus/{{b.id}}/">Hapus</a></td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

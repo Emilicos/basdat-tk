@@ -5,14 +5,19 @@
 <title>Form Kategori Restoran</title>
 {% endblock meta %}
 
+<body>
+    
 {% block content %}
 <div class="container py-5">
 <h2>Form Kategori Restoran</h2>
 <form method="POST" action="">
     {% csrf_token %}
-    <p>Nama : </p>
+    <label>Kategori Restoran : </label>
     <input type="text" name="namaKategori" placeholder="Masukkan nama kategori" class="form-control">
-    <button type="submit" class="btn btn-primary">Simpan</button>
+    <p></p>
+    <center>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </center>
 </form>
 
 {% if messages %}
@@ -24,4 +29,7 @@
 {% endif %} 
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 {% endblock content %}
+</body>
