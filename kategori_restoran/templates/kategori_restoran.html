@@ -17,11 +17,12 @@
         </ul>
     {% endif %}     
 
-<table class="table table-striped w-auto">
+
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama Kategori Restoran</th>
+            <th>Kategori Restoran</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -30,7 +31,11 @@
         <tr>
             <td>{{k.nomor}}</td>
             <td>{{k.name}}</td>
-            <td><a class="btn btn-primary" href="{% url 'KategoriRestoran:hapus_kategori_restoran' %}">Hapus</a></td>
+            <td>
+                {% if k.status == 1 %}
+                <a class="btn btn-primary" href="{% url 'kategori_restoran:hapus_kategori_restoran' k.id %}">Hapus</a>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

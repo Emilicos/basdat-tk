@@ -29,4 +29,6 @@ urlpatterns = [
     path('jam-operasional/', include('jam_operasional.urls')),
     path('transaksi-pesanan/', include('transaksi_pesanan.urls')),
     path('transaksi-pesanan-kurir/', include('transaksi_pesanan_kurir.urls')),
+    path('kategori-restoran/', include('kategori_restoran.urls')),
+    path('bahan-makanan/', include('bahan_makanan.urls')),
 ]
