@@ -413,7 +413,7 @@ def gagal_bayar(request):
 
         cursor.execute("SET SEARCH_PATH TO PUBLIC;")
     del pelanggan[email]
-    return redirect('authentication:dashboard_pelanggan')
+    return redirect('authentication:dashboard')
 
 def ringkasan_pesanan(request, email, date_time):
     context = {

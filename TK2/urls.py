@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, include
-import trigger_5.urls as trigger_5
 
 
 urlpatterns = [
@@ -29,6 +28,4 @@ urlpatterns = [
     path('resto-pay/', include('resto_pay.urls')),
     path('jam-operasional/', include('jam_operasional.urls')),
     path('transaksi-pesanan/', include('transaksi_pesanan.urls')),
-    # path('', include('trigger_5.urls')),
-    path('trigger_5/', include(trigger_5))
 ]

@@ -33,5 +33,5 @@ def transaksi_pesanan_detail(request, id): # TODO instead pake dummy, coba fetch
     return render(request, 'transaksi_pesanan_detail.html', context)
 
 #TODO bikin views yang render halaman sehabis klik details & selesai buat html transaksi_pesanan_kurir.html
-def pesanan_detail(request)
+def pesanan_detail(request):
     return render(request, 'detail_transaksi_pemesanan_kurir.html')

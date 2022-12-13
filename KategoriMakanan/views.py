@@ -48,16 +48,24 @@ def show_daftar_kategori_makanan(request):
         # get all category
         cursor.execute("SET SEARCH_PATH TO SIREST;")
         cursor.execute(f"""
-            SELECT id, name
-            FROM FOOD_CATEGORY;
+            SELECT FC.id as id, FC.name as name, F.FCategory as FCategory
+            FROM FOOD_CATEGORY FC LEFT OUTER JOIN 
+                (SELECT DISTINCT FCategory
+                FROM FOOD) F
+            ON FC.Id=F.FCategory;
         """)
 
         kategori = dict_fetch_all(cursor)
         context['kategori'] = kategori
+        
 
         # numbering
         for i in range(len(kategori)):
             context['kategori'][i]['nomor'] = str(i+1)
+            if (context['kategori'][i]['fcategory'] != None):
+                context['kategori'][i]['status'] = 0
+            else:
+                context['kategori'][i]['status'] = 1
 
         cursor.execute("SET SEARCH_PATH TO PUBLIC;")
 
