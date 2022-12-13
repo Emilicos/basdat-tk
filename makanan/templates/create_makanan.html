@@ -36,17 +36,17 @@
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                         <label for="selectKategoriMakananForm"> Kategori makanan: </label>
                         <select id = "selectKategoriMakananForm" class="form-select" aria-label="Default select example">
-                            <option value = "default" selected> Pilih kategori </option>
-                            <option value = 'kategori1'> Kategori1 </option>
-                            <option value = 'kategori2'> Kategori2 </option>
+                            {% for kategori in food_category_no_dumps %}
+                                <option value = "{{kategori.id}}"> {{kategori.name}} </option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                         <label for="selectBahanMakananForm"> Bahan makanan: </label>
                         <select id = "selectBahanMakananForm" class="form-select" aria-label="Default select example">
-                            <option value = "default" selected> Pilih bahan makanan </option>
-                            <option value = 'bahan1'> Bahan Makanan 1 </option>
-                            <option value = 'bahan2'> Bahan Makanan 2 </option>
+                            {% for ingredient in ingredient_no_dumps %}
+                                <option value = "{{ingredient.id}}"> {{ingredient.name}} </option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -63,41 +63,92 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+      var count = 0;
+      var dataIngredient = String.raw`{{ingredient| safe}}`
+      var parsedIngredient = JSON.parse(dataIngredient)
     
+      var dataFoodCategory = String.raw`{{food_category| safe}}`
+      var parsedFoodCategory = JSON.parse(dataFoodCategory)
+
+
       $("#tambah").click(function(){
-        console.log("masuk")
         var text = `
         <div class="form-group mt-4 flex justify-center items-center gap-x-4">
                 <label> Bahan makanan: </label>
-                <select class="form-select" aria-label="Default select example" required>
-                    <option value = "" selected> Pilih bahan makanan </option>
-                    <option value = 'bahan1'> Bahan Makanan 1 </option>
-                    <option value = 'bahan2'> Bahan Makanan 2 </option>
+                <select class="form-select" aria-label="Default select example" id = "selectBahanMakananForm${count}" required>
+                    ${parsedIngredient.map((item, index) => (
+                        `<option value = '${item.id}'> ${item.name} </option>`
+                    ))}
                 </select>
             </div>
         `
+        count += 1;
         $(text).appendTo("#idTambah")
       })
 
-      $("#idSubmit").submit(function(e){
-          e.preventDefault()
-          var namaMakanan = $("#namaMakananForm").val()
-          var deskripsiMakanan = $("#deskripsiForm").val()
-          var stok = $("#stokForm").val()
-          var harga = $("#hargaForm").val()
-          var kategoriMakanan = $("#selectKategoriMakananForm").val()
-          var bahanMakanan = $("#selectBahanMakananForm").val()
+      $(document).ready(function () {
 
-          if(namaMakanan === "" || deskripsiMakanan === "" || stok === "" || harga === "" || kategoriMakanan === "" || bahanMakanan === "default"){
-            $("#errorMessage").html("")
-            const text = `<p class = "text-white font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
-            $(text).appendTo("#errorMessage")
-          }else{
-            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/"
-          }
-        })
+        $("#idSubmit").submit(function(e){
+            e.preventDefault()
+            var namaMakanan = $("#namaMakananForm").val()
+            var deskripsiMakanan = $("#deskripsiForm").val()
+            var stok = $("#stokForm").val()
+            var harga = $("#hargaForm").val()
+            var kategoriMakanan = $("#selectKategoriMakananForm").val()
+            var bahanMakanan = $("#selectBahanMakananForm").val()
+            
+            var semuaBahanMakanan = new Set()
 
-
+            if(namaMakanan === "" || deskripsiMakanan === "" || stok === "" || harga === "" || kategoriMakanan === "" || bahanMakanan === "default"){
+                $("#errorMessage").html("")
+                const text = `<p class = "text-white font-bold text-center"> Data yang diisikan belum lengkap, silakan lengkapi data terlebih dahulu. </p>`
+                $(text).appendTo("#errorMessage")
+            }else{
+                semuaBahanMakanan.add(bahanMakanan)
+                for(let i = 0; i < count; i++){
+                    semuaBahanMakanan.add($(`#selectBahanMakananForm${i}`).val())
+                }
+                semuaBahanMakanan = Array.from(semuaBahanMakanan)
+                let bahanMakananDalamString = ""
+                for(let i = 0; i < semuaBahanMakanan.length; i++){
+                    if(i != semuaBahanMakanan.length - 1){
+                        bahanMakananDalamString += 
+                        `${semuaBahanMakanan[i]}, `
+                    }else{
+                        bahanMakananDalamString += `${semuaBahanMakanan[i]}`
+                    }
+                }
+                try{
+                    $.ajax({
+                        type: "POST",
+                        url: "/makanan/create/",
+                        data: {
+                        "foodname": namaMakanan,
+                        "description": deskripsiMakanan,
+                        "stock": parseInt(stok),
+                        "price": parseInt(harga),
+                        "fcategory": kategoriMakanan,
+                        "ingredient": bahanMakananDalamString,
+                        },
+                        success: function(data){
+                        if(data.message == "Successful"){
+                            console.log()
+                            window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/"
+                        }else{
+                            alert(data.message)
+                        }
+                        },
+                        error: function(error){
+                        alert(error)
+                        }
+                    })
+                }catch (error){
+                    alert(error)
+                }
+                // window.location.href = window.location.protocol + "//" + window.location.host + "/" + "makanan/restoran/"
+            }
+            })
+        });
     </script>
     {% endblock content %}
 </body>

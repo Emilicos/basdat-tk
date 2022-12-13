@@ -12,22 +12,30 @@
     {% block content %}  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <div class = "flex flex-col my-8 mx-4">
-        <h1 class = "font-bold my-4 text-center"> Detail Restoran: [Nama - Cabang Restoran] </h1> 
-        <p> Nama Restoran: McDonalds </p> 
-        <p>Cabang: Depok </p>
-        <p> Nomor telepon: (021) 14045 </p>
-        <p>Jalan: Jl. Margonda Raya No.229 </p>
-        <p>Kecamatan: Margonda</p>
-        <p>Kota: Depok</p>
-        <p>Provinsi: Jawa Barat </p>
-        <p>Rating: 4.7</p>
-        <p>Kategori restoran: Fast Food </p>
+        <h1 class = "font-bold my-4 text-center"> Detail Restoran: {{restaurant_no_dumps.rname}} - {{restaurant_no_dumps.rbranch}} </h1> 
+        <p> Nama Restoran: {{restaurant_no_dumps.rname}} </p> 
+        <p>Cabang: {{restaurant_no_dumps.rbranch}} </p>
+        <p> Nomor telepon: ({{restaurant_no_dumps.rphonenum}} </p>
+        <p>Jalan: {{restaurant_no_dumps.street}} </p>
+        <p>Kecamatan: {{restaurant_no_dumps.district}} </p>
+        <p>Kota: {{restaurant_no_dumps.city}}</p>
+        <p>Provinsi: {{restaurant_no_dumps.province}} </p>
+        <p>Rating: {{restaurant_no_dumps.rating}} </p>
+        <p>Kategori restoran: {{restaurant_no_dumps.rcategory}}</p>
         <p>Jam operasional: </p>
-        <li> 13:00 </li>
-        <li> 14:00</li>
+        {% for time in restaurant_operating_hours_no_dumps %}
+            <p class = "px-4"> Hari: {{time.day}} </p>
+            <li class = "px-4"> Start Hours: {{time.starthours}} </li>
+            <li class = "px-4"> End Hours: {{time.endhours}} </li>
+        {% endfor %}
         <p>Promo berlangsung:</p>
-        <li> Promo anak </li>
-        <li> Promo banyak beli </li>
+            {% if restaurant_promo_no_dumps|length == 0 %}
+                <h1> Tidak ada promo berlangsung </h1>
+            {% else %}
+                {% for promo in restaurant_promo_no_dumps %}
+                    <li class = "px-4"> {{promo.promoname}} </li>
+                {% endfor %}
+            {% endif %}
         <a href = "/restoran/" class = "text-center"><button href = "/restoran/" class = "inline max-w-360px text-center"> Kembali </button> </a>
     </div>
     {% endblock content %}

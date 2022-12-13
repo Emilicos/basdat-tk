@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class Trigger5Config(AppConfig):
+class BahanMakananConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'trigger_5'
+    name = 'bahan_makanan'

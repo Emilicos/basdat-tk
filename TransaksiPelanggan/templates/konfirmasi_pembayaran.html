@@ -8,7 +8,14 @@
 {% block content %}
 <div class="container py-5">
     <h2>Konfirmasi Pembayaran</h2>
-    <h4>Waktu Pemesanan: 2022-11-04 11:30:05</h4>
+    <h4>Waktu Pemesanan: {{transaction.datetime}}</h4>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %} 
 
     <div class="row">
         <div class="card mb-4">
@@ -18,7 +25,7 @@
                 <p class="mb-0">Nama Pelanggan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Dian</p>
+                <p class="text-muted mb-0">{{transaction.fname}} {{transaction.lname}}</p>
             </div>
             </div>
             <hr>
@@ -27,7 +34,7 @@
                 <p class="mb-0">Jalan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Jl. H. Amat</p>
+                <p class="text-muted mb-0">{{transaction.street}}</p>
             </div>
             </div>
             <hr>
@@ -36,7 +43,7 @@
                 <p class="mb-0">Kecamatan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Beji</p>
+                <p class="text-muted mb-0">{{transaction.district}}</p>
             </div>
             </div>
             <hr>
@@ -45,7 +52,7 @@
                 <p class="mb-0">Kota:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Depok</p>
+                <p class="text-muted mb-0">{{transaction.city}}</p>
             </div>
             </div>
             <hr>
@@ -54,7 +61,7 @@
                 <p class="mb-0">Provinsi:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Jawa Barat</p>
+                <p class="text-muted mb-0">{{transaction.province}}</p>
             </div>
             </div>
         </div>
@@ -67,7 +74,7 @@
                 <p class="mb-0">Restoran:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Warteg Kutek</p>
+                <p class="text-muted mb-0">{{restaurant.rname}} {{restaurant.rbranch}}</p>
             </div>
             </div>
             <hr>
@@ -76,7 +83,7 @@
                 <p class="mb-0">Jalan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Jl. H. Amat</p>
+                <p class="text-muted mb-0">{{restaurant.street}}</p>
             </div>
             </div>
             <hr>
@@ -85,7 +92,7 @@
                 <p class="mb-0">Kecamatan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Beji</p>
+                <p class="text-muted mb-0">{{restaurant.district}}</p>
             </div>
             </div>
             <hr>
@@ -94,7 +101,7 @@
                 <p class="mb-0">Kota:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Depok</p>
+                <p class="text-muted mb-0">{{restaurant.city}}</p>
             </div>
             </div>
             <hr>
@@ -103,7 +110,7 @@
                 <p class="mb-0">Provinsi:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Jawa Barat</p>
+                <p class="text-muted mb-0">{{restaurant.province}}</p>
             </div>
             </div>
         </div>
@@ -127,36 +134,23 @@
                 <p class="mb-0">Catatan</p>
             </div>
             </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-1">
-                <p class="text-muted mb-0">1</p>
-            </div>
-            <div class="col-sm-3">
-                <p class="text-muted mb-0">Telur Dadar</p>
-            </div>
-            <div class="col-sm-3">
-                <p class="text-muted mb-0">2</p>
-            </div>
-            <div class="col-sm-5">
-                <p class="text-muted mb-0">bungkusnya digabung</p>
-            </div>
-            </div>
-            <hr>
-            <div class="row">
-            <div class="col-sm-1">
-                <p class="text-muted mb-0">2</p>
-            </div>
-            <div class="col-sm-3">
-                <p class="text-muted mb-0">Nasi</p>
-            </div>
-            <div class="col-sm-3">
-                <p class="text-muted mb-0">1</p>
-            </div>
-            <div class="col-sm-5">
-                <p class="text-muted mb-0"></p>
-            </div>
-            </div>
+            {% for m in menu %}
+                <hr>
+                <div class="row">
+                <div class="col-sm-1">
+                    <p class="text-muted mb-0">{{m.nomor}}</p>
+                </div>
+                <div class="col-sm-3">
+                    <p class="text-muted mb-0">{{m.foodname}}</p>
+                </div>
+                <div class="col-sm-3">
+                    <p class="text-muted mb-0">{{m.amount}}</p>
+                </div>
+                <div class="col-sm-5">
+                    <p class="text-muted mb-0">{{m.note}}</p>
+                </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -168,7 +162,7 @@
                 <p class="mb-0">Total Harga Makanan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">16000</p>
+                <p class="text-muted mb-0">{{transaction.totalfood}}</p>
             </div>
             </div>
             <hr>
@@ -177,7 +171,7 @@
                 <p class="mb-0">Total Diskon:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">0</p>
+                <p class="text-muted mb-0">{{transaction.totaldiscount}}</p>
             </div>
             </div>
             <hr>
@@ -186,7 +180,7 @@
                 <p class="mb-0">Biaya Pengantaran:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">4000</p>
+                <p class="text-muted mb-0">{{transaction.deliveryfee}}</p>
             </div>
             </div>
             <hr>
@@ -195,7 +189,7 @@
                 <p class="mb-0">Total Biaya:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">15000</p>
+                <p class="text-muted mb-0">{{transaction.totalprice}}</p>
             </div>
             </div>
             <hr>
@@ -204,7 +198,7 @@
                 <p class="mb-0">Jenis Pembayaran:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">ATM</p>
+                <p class="text-muted mb-0">{{transaction.name}}</p>
             </div>
             </div>
         </div>
@@ -218,7 +212,7 @@
                 <p class="mb-0">Sisa Waktu Konfirmasi:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">00:00:55</p>
+                <p class="text-muted mb-0" id="waktu_konfirmasi">00:00:55</p>
             </div>
             </div>
             <hr>
@@ -227,7 +221,7 @@
                 <p class="mb-0">Status Pembayaran:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Menunggu Pembayaran</p>
+                <p class="text-muted mb-0">{{payment_status.name}}</p>
             </div>
             </div>
             <hr>
@@ -236,11 +230,27 @@
                 <p class="mb-0">Status Pesanan:</p>
             </div>
             <div class="col-sm-9">
-                <p class="text-muted mb-0">Menunggu Konfirmasi Restoran</p>
+                <p class="text-muted mb-0">{{transaction_status.name}}</p>
             </div>
             </div>
         </div>
     </div> 
-    <a class="btn btn-primary" href="{% url 'TransaksiPelanggan:ringkasan_pesanan' %}">KONFIRMASI PEMBAYARAN</a>
+    <a class="btn btn-primary" href="{% url 'TransaksiPelanggan:bayar' %}">KONFIRMASI PEMBAYARAN</a>
 </div>
+
+<script>
+    var distance = 60;
+    var x = setInterval(function() {
+        distance = distance - 1;
+    
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("waktu_konfirmasi").innerHTML = distance + "s ";
+    
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("waktu_konfirmasi").innerHTML = "EXPIRED";
+            location.replace("{% url 'TransaksiPelanggan:gagal_bayar' %}");
+        }
+    },1000)
+</script>
 {% endblock content %}

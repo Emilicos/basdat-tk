@@ -3,6 +3,7 @@
 
 {% block meta %}
 <title>Pilih Menu</title>
+<script src="jquery-3.6.1.min.js"></script>
 {% endblock meta %}
 
 {% block content %}
@@ -27,43 +28,72 @@
             <th>Jumlah</th>
             <th>Catatan (Opsional)</th>
         </tr>
-            <td>1</td>
-            <td>Telur Dadar</td>
-            <td>4000</td>
-            <td><input name="menu1" type="number" min=0 value="0"></td>
-            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
+        {% for m in menu %}
+        <tr>
+            <td>{{m.nomor}}</td>
+            <td>{{m.foodname}}</td>
+            <td>{{m.price}}</td>
+            <td>
+                <button type="button" id="{{m.nomor}}" onclick="decrement(this.id)">-</button>
+                <p id="jumlah_temp{{m.nomor}}">0</p>
+                <button type="button" id="{{m.nomor}}_{{m.stock}}" onclick="increment(this.id)">+</button>
+            </td>
+            <input id="jumlah_{{m.nomor}}" name="jumlah_{{m.foodname}}" type="number" hidden value="0">
+            <td><textarea id="catatan_{{m.nomor}}" name="catatan_{{m.foodname}}" rows="5" cols="10" maxlength="255" disabled></textarea></td>
         </tr>
-        </tr>
-            <td>2</td>
-            <td>Nasi</td>
-            <td>4000</td>
-            <td><input name="menu2" type="number" min=0 value="0"></td>
-            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
-        </tr>
-        </tr>
-            <td>3</td>
-            <td>Ikan Goreng</td>
-            <td>5000</td>
-            <td><input name="menu3" type="number" min=0 value="0"></td>
-            <td><textarea name="txtArea" rows="5" cols="10" maxlength="255"></textarea></td>
-        </tr>
+        {% endfor %}
     </table>
 
     <h1>Pilih Metode Pembayaran dan Pengantaran</h1>
         <p><label for="pengantaran">Metode Pengantaran :</label></p>
             <select name="pengantaran" id="pengantaran">
-                <option value="Mobil">Mobil</option>
+                <option value="Car">Car</option>
                 <option value="Motor">Motor</option>
             </select>
         <p><label for="pembayaran">Metode Pembayaran :</label></p>
             <select name="pembayaran" id="pembayaran">
-                <option value="ATM">ATM</option>
-                <option value="m-banking">m-banking</option>
-                <option value="Indomaret/Alfamart">Indomaret/Alfamart</option>
-                <option value="RestoPay">RestoPay</option>
-                <option value="e-wallet">e-wallet</option>
+                {% for p in metode_pembayaran %}
+                <option value="{{p.id}}_{{p.name}}">{{p.name}}</option>
+                {% endfor %}
             </select>
             <p><button type="submit" class="btn btn-primary">Pesan</button></p>
 </form>
 </div>
+
+<script>
+    function increment(id) {
+        console.log("masuk")
+        var stok = id.split("_")[1];
+        var elem = document.getElementById(`jumlah_temp${id.split("_")[0]}`);
+        var jumlah = elem.innerHTML;
+        if(jumlah == stok) return;
+        jumlah++
+        enable(id.split("_")[0]);
+        elem.innerText = jumlah;
+        document.getElementById(`jumlah_${id.split("_")[0]}`).value = jumlah;
+    }
+
+    function decrement(id) {
+        var elem = document.getElementById(`jumlah_temp${id}`);
+        var jumlah = elem.innerHTML;
+        if(jumlah == 1) {
+            disable(id);
+        }
+        if(jumlah == 0) return;
+        jumlah--
+        elem.innerText = jumlah;
+        document.getElementById(`jumlah_${id}`).value = jumlah;
+    }
+
+    function disable(id) {
+        var textarea = document.getElementById(`catatan_${id}`);
+        textarea.disabled = true;
+        textarea.value = '';
+    }
+
+    function enable(id) {
+        var textarea = document.getElementById(`catatan_${id}`);
+        textarea.disabled = false;
+    }
+</script>
 {% endblock content %}

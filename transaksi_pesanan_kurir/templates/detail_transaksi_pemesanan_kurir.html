@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% block meta %}
+    <title> Detail Ringkasan Pesanan </title> 
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block content %}  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <h1 class = "font-bold my-4"> Ringkasan Pesanan </h1> 
+        <p class = "my-8"> Waktu Pemesanan :  {{waktu_pemesanan}} </p> 
+
+        <p> Nama Pelanggan: {{nama_pelanggan}} </p>
+        <p> Jalan: {{jalan}} </p>
+        <p> Kecamatan: {{kecamatan}} </p>
+        <p> Kota: {{kota}} </p>
+        <p class = "mb-4"> Provinsi: {{provinsi}} </p>
+
+        <p>Restoran: {{rname}} {{rbranch}}</p>
+        <p>Jalan: {{jalan_resto}} </p>
+        <p>Kecamatan: {{district_resto}}</p>
+        <p>Kota: {{city_resto}} </p>
+        <p class = "mb-4">Provinsi: {{province_resto}}</p>
+
+        <p>Makanan yang dipesan:</p>
+        <li> Ayam Goreng (1) - [catatan bila ada] </li>
+        <li> Ice Cream (2) - [catatan bila ada] </li>
+        <p>Total Harga Makanan: {{total_makanan}} </p>
+        <p>Total Diskon: {{total_diskon}}</p>
+        <p>Biaya Pengantaran: {{total_pengantaran}} </p>
+        <p>Total Biaya: {{total_harga}}</p>
+        <p class = "mb-4">Jenis Pembayaran: {{payment_method}}</p>
+
+        <p>Status Pembayaran: {{payment_status}}</p>
+        <p class = "mb-4">Status Pesanan: Pesanan Diantar</p>
+
+        <p>Kurir: {{nama_kurir}}</p>
+        <p>Plat Kendaraan: {{platnomor}}</p>
+        <p>Jenis Kendaraan: {{jenis_kendaraan}} </p>
+        <p class = "mb-4">Merk Kendaraan: {{merk_kendaraan}} </p>
+
+        <button type="button" class="btn btn-primary">[Kembali]</button>
+    </div>
+    {% endblock content %}
+</body>
