@@ -1,100 +1,11 @@
+import datetime
+import random
+
 from django.shortcuts import render
 from django.http import HttpResponse, QueryDict
 from django.utils import timezone
-import datetime
-import random
-from utils.users import *
 
-DUMMY_LIST = [
-    {
-        'id': 1,
-        'nama' : 'Mikayla Putri',
-        'jalan': 'Jalan Bahagia nomor 72',
-        'kecamatan': 'Cinere',
-        'kota': 'Depok',
-        'provinsi': 'Jawa Barat',
-        'restoran_nama': 'Warung Mantap Depok',
-        'restoran_jalan': 'Jalan Sejahtera nomor 5',
-        'restoran_kecamatan': 'Bojongsari',
-        'restoran_kota': 'Depok',
-        'restoran_provinsi': 'Jawa Barat',
-        'makanan': [
-            'Ayam Goreng (1) - Tidak pakai kulit',
-            'Ice Cream (2) - Cair',
-        ],
-        'makanan_total_harga': 11000,
-        'makanan_total_diskon': 0,
-        'biaya_pengantaran': 4000,
-        'total_biaya': 15000,
-        'jenis_pembayaran': 'RestoPay',
-        'waktu' : '2022-11-04 11:30:05',
-        'status_pembayaran': 'Berhasil',
-        'status_pesanan' : 'Menunggu Konfirmasi Restoran',
-        'kurir': '-',
-        'plat_kendaraan': '-',
-        'jenis_kendaraan': '-',
-        'merk_kendaraan': '-',
-    },
-    {
-        'id': 2,
-        'nama' : 'Kenny Agung',
-        'jalan': 'Jalan Bahagia nomor 72',
-        'kecamatan': 'Cinere',
-        'kota': 'Depok',
-        'provinsi': 'Jawa Barat',
-        'restoran_nama': 'Warung Mantap Depok',
-        'restoran_jalan': 'Jalan Sejahtera nomor 5',
-        'restoran_kecamatan': 'Bojongsari',
-        'restoran_kota': 'Depok',
-        'restoran_provinsi': 'Jawa Barat',
-        'makanan': [
-            'Ayam Goreng (1) - Tidak pakai kulit',
-            'Ice Cream (2) - Cair',
-        ],
-        'makanan_total_harga': 11000,
-        'makanan_total_diskon': 0,
-        'biaya_pengantaran': 4000,
-        'total_biaya': 15000,
-        'jenis_pembayaran': 'RestoPay',
-        'waktu' : '2022-11-04 10:54:02',
-        'status_pembayaran': 'Berhasil',
-        'status_pesanan' : 'Pesanan Dibuat',
-        'kurir': '-',
-        'plat_kendaraan': '-',
-        'jenis_kendaraan': '-',
-        'merk_kendaraan': '-',
-    },
-    {
-        'id': 3,
-        'nama' : 'Venti Bardbatos',
-        'jalan': 'Jalan Bahagia nomor 72',
-        'kecamatan': 'Cinere',
-        'kota': 'Depok',
-        'provinsi': 'Jawa Barat',
-        'restoran_nama': 'Warung Mantap Depok',
-        'restoran_jalan': 'Jalan Sejahtera nomor 5',
-        'restoran_kecamatan': 'Bojongsari',
-        'restoran_kota': 'Depok',
-        'restoran_provinsi': 'Jawa Barat',
-        'makanan': [
-            'Ayam Goreng (1) - Tidak pakai kulit',
-            'Ice Cream (2) - Cair',
-            'Jus Dandelion (1) - Anemo Charged'
-        ],
-        'makanan_total_harga': 11000,
-        'makanan_total_diskon': 0,
-        'biaya_pengantaran': 4000,
-        'total_biaya': 15000,
-        'jenis_pembayaran': 'RestoPay',
-        'waktu' : '2022-11-04 10:54:02',
-        'status_pembayaran': 'Berhasil',
-        'status_pesanan' : 'Pesanan Diantar',
-        'kurir': 'Tabibito',
-        'plat_kendaraan': 'CEL35T145U5',
-        'jenis_kendaraan': 'Motor',
-        'merk_kendaraan': 'Shonda',
-    },
-]
+from utils.users import *
 
 # Create your views here.
 def transaksi_pesanan_daftar(request):
@@ -109,12 +20,11 @@ def transaksi_pesanan_daftar(request):
         return HttpResponse(status=404)
     
     if request.method == 'GET':
-        # TODO: tanya ke kakaknya apa Pesanan Selesai dan Pesanan Ditolak termasuk Pesanan Berlangsung
         try:
             with connection.cursor() as cursor:
                 cursor.execute('SET SEARCH_PATH TO SIREST;')
                 cursor.execute(f'''
-                    SELECT ua.FName, ua.LName, t.Email, t.DateTime, ts.Name AS TransactionStatus
+                    SELECT ua.FName, ua.LName, t.Email, t.DateTime, ts.Name AS TransactionStatus, ts.Id AS TransactionStatusId
                     FROM TRANSACTION t,
                         USER_ACC ua,
                         TRANSACTION_HISTORY th,
@@ -145,7 +55,7 @@ def transaksi_pesanan_daftar(request):
                     transaction_list_temp[i]['formatteddatetime'] = transaction_list_temp[i]['datetime'].strftime('%Y-%m-%d %H:%M:%S')
                 transaction_list = []
                 for i in range(len(transaction_list_temp)):
-                    if transaction_list_temp[i]['transactionstatus'] != 'Pesanan Selesai':
+                    if transaction_list_temp[i]['transactionstatusid'] != 'TS4' and transaction_list_temp[i]['transactionstatusid'] != 'TS5':
                         transaction_list.append(transaction_list_temp[i])
                 context = {
                     'transaction_list': transaction_list,
