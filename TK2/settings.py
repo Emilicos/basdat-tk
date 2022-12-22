@@ -92,33 +92,21 @@ ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASE_URL = 'postgresql://postgres:qedKf4ydIxFDx9kJEhLs@containers-us-west-124.railway.app:6592/railway'
+DATABASE_URL = 'postgresql://postgres:1jL7GfuxDnIksv4HJasV@containers-us-west-119.railway.app:5566/railway'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'qedKf4ydIxFDx9kJEhLs',
-        'HOST': 'containers-us-west-124.railway.app',
-        'PORT': '6592',
+        'PASSWORD': '1jL7GfuxDnIksv4HJasV',
+        'HOST': 'containers-us-west-119.railway.app',
+        'PORT': '5566',
         'CONN_MAX_AGE': 600
     }
 }
 
 # Set database settings automatically using DATABASE_URL.
-
-# import dj_database_url
-# if PRODUCTION:
-#     DATABASES['default'] = dj_database_url.config(
-#         engine='django.db.backends.postgresql',
-#         name='railway',
-#         user='postgres',
-#         password='qedKf4ydIxFDx9kJEhLs',
-#         host='containers-us-west-124.railway.app',
-#         port='6592',
-#         conn_max_age=600
-#     )
 import sys
 if 'test' in sys.argv:
     DATABASES['default'] = {
